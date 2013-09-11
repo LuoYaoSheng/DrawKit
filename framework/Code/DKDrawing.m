@@ -148,8 +148,6 @@ static id	sDearchivingHelper = nil;
 		s = 'a';
 	
 #warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
 	return [NSString stringWithFormat:@"%ld.%ld.%c%ld", (long)(v & 0xFF00) >> 8, (long)(v & 0xF0) >> 4, s, (long)( v & 0x0F )];
 }
 
