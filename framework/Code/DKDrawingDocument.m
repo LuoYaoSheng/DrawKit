@@ -21,7 +21,6 @@
 #import "DKDrawingInfoLayer.h"
 #import "LogEvent.h"
 
-
 @interface DKSelectorWrapper : NSObject
 {
 	SEL		mSelector;
@@ -34,17 +33,18 @@
 
 #pragma mark Constants (Non-localized)
 
-NSString*		kDKDrawingDocumentType				= @"Drawing";
-NSString*		kDKDrawingDocumentUTI				= @"net.apptree.drawing";
-NSString*		kDKDrawingDocumentXMLType			= @"xml_drawing";
-NSString*		kDKDrawingDocumentXMLUTI			= @"net.apptree.xmldrawing";
+const NSString*		kDKDrawingDocumentType				= @"Drawing";
+const NSString*		kDKDrawingDocumentUTI				= @"net.apptree.drawing";
+const NSString*		kDKDrawingDocumentXMLType			= @"xml_drawing";
+const NSString*		kDKDrawingDocumentXMLUTI			= @"net.apptree.xmldrawing";
 
-NSString*		kDKDocumentLevelsOfUndoDefaultsKey	= @"kDKDocumentLevelsOfUndo";
+const NSString*		kDKDocumentLevelsOfUndoDefaultsKey	= @"kDKDocumentLevelsOfUndo";
 
 
 #define	qGlobalUndoManager		0
 
 #pragma mark -
+
 @implementation DKDrawingDocument
 #pragma mark As a DKDrawDocument
 
@@ -260,27 +260,6 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 
 #pragma mark -
-
-///*********************************************************************************************************************
-///
-/// method:			mainView
-/// scope:			public instance method
-/// overrides:		
-/// description:	return the document's main view
-/// 
-/// parameters:		none
-/// result:			the document's main view
-///
-/// notes:			if the document has a main view, this returns it. Normally this is set up in the nib. A document
-///					isn't required to have an outlet to the main view but it makes setting everything up easier.
-///
-///********************************************************************************************************************
-
-- (DKDrawingView*)		mainView
-{
-	return mMainDrawingView;
-}
-
 
 ///*********************************************************************************************************************
 ///
@@ -961,7 +940,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 - (void)				setPrintInfo:(NSPrintInfo*) printInfo
 {
 	[super setPrintInfo:printInfo];
-	[mMainDrawingView setPrintInfo:printInfo];
+	[self.mainView setPrintInfo:printInfo];
 }
 
 
@@ -995,7 +974,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 #ifndef qTestAutoBackendCreation
 	
-	if ( mMainDrawingView != nil && [self drawing] != nil )
+	if ( [self mainView] != nil && [self drawing] != nil )
 	{
 		DKViewController*  mainViewController = [self makeControllerForView:[self mainView]];
 		[[self drawing] addController:mainViewController];

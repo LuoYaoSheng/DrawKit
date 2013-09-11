@@ -1,8 +1,10 @@
 ///**********************************************************************************************************************************
 ///  DKDrawDocument.h
 ///  DrawKit ©2005-2008 Apptree.net
+//
 ///
 ///  Created by Graham Cox on 15/10/2006.
+///  Updated and refactored by Stephan Zehrer 2013
 ///
 ///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
 ///
@@ -10,16 +12,26 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @class DKDrawing, DKDrawingView, DKViewController, DKDrawingTool, DKPrintDrawingView;
-
 
 @interface DKDrawingDocument : NSDocument
 {
 @private
-	IBOutlet DKDrawingView*	mMainDrawingView;
+	//IBOutlet DKDrawingView*	mMainDrawingView;
 	DKDrawing*				m_drawing;
 }
+
+///*********************************************************************************************************************
+///
+/// description:	return the document's main view
+///
+/// result:			the document's main view
+///
+/// notes:			if the document has a main view, this returns it. Normally this is set up in the nib. A document
+///					isn't required to have an outlet to the main view but it makes setting everything up easier.
+///
+///********************************************************************************************************************
+@property (nonatomic, strong) IBOutlet DKDrawingView* mainView;
 
 + (NSUndoManager*)		sharedDrawkitUndoManager;
 
@@ -31,7 +43,7 @@
 
 - (void)				setDrawing:(DKDrawing*) drwg;
 - (DKDrawing*)			drawing;
-- (DKDrawingView*)		mainView;
+
 - (DKViewController*)	makeControllerForView:(NSView*) aView;
 - (DKDrawing*)			makeDefaultDrawing;
 - (Class)				classOfDefaultDrawingLayer;
