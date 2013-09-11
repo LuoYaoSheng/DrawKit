@@ -4,7 +4,7 @@
 ///
 ///  Created by Graham Cox on 15/10/2006.
 ///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
+///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
 ///
 ///**********************************************************************************************************************************
 
@@ -56,9 +56,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			sharedDrawkitUndoManager
 /// scope:			public class method
-/// overrides:		
+/// overrides:
 /// description:	returns an undo manager that can be shared by multiple documents
-/// 
+///
 /// parameters:		none
 /// result:			the shared instance of the undo manager
 ///
@@ -72,7 +72,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	
 	if ( s_um == nil )
 		s_um = [[DKUndoManager alloc] init];
-		
+    
 	return (NSUndoManager*)s_um;
 }
 
@@ -81,9 +81,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			bindFileImportType:toSelector:
 /// scope:			public class method
-/// overrides:		
+/// overrides:
 /// description:	establishes a mapping between a file type and a method that can import that file type
-/// 
+///
 /// parameters:		<fileType> a filetype or UTI string for a file type
 ///					<aSelector> a class method of DKDrawing that can import the file type
 /// result:			none
@@ -95,7 +95,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)				bindFileImportType:(NSString*) fileType toSelector:(SEL) aSelector
++ (void)bindFileImportType:(NSString*) fileType toSelector:(SEL) aSelector
 {
 	NSAssert( fileType != nil, @"cannot bind a nil fileType");
 	
@@ -116,9 +116,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			bindFileExportType:toSelector:
 /// scope:			public class method
-/// overrides:		
+/// overrides:
 /// description:	establishes a mapping between a file type and a method that can export that file type
-/// 
+///
 /// parameters:		<fileType> a filetype or UTI string for a file type
 ///					<selector> a selector for the method that implements the file export
 /// result:			none
@@ -130,13 +130,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)				bindFileExportType:(NSString*) fileType toSelector:(SEL) aSelector
++ (void)bindFileExportType:(NSString*) fileType toSelector:(SEL) aSelector
 {
 	NSAssert( fileType != nil, @"cannot bind a nil fileType");
-
+    
 	if ( sFileExportBindings == nil )
 		sFileExportBindings = [[NSMutableDictionary alloc] init];
-		
+    
 	if ( aSelector != NULL )
 	{
 		DKSelectorWrapper* sw = [DKSelectorWrapper wrapperWithSelector:aSelector];
@@ -151,13 +151,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			setDefaultLevelsOfUndo:
 /// scope:			public class method
-/// overrides:		
+/// overrides:
 /// description:	set the default levels of undo assigned to new documents
-/// 
+///
 /// parameters:		<levels> the number of undo levels
 /// result:			none
 ///
-/// notes:			
+/// notes:
 ///
 ///********************************************************************************************************************
 
@@ -171,10 +171,10 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			defaultLevelsOfUndo:
 /// scope:			public class method
-/// overrides:		
+/// overrides:
 /// description:	return the default levels of undo assigned to new documents
-/// 
-/// parameters:		none 
+///
+/// parameters:		none
 /// result:			the number of undo levels
 ///
 /// notes:			if the value wasn't found in the defaults, DEFAULT_LEVELS_OF_UNDO is returned
@@ -199,9 +199,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			setDrawing:
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	set the document's drawing object
-/// 
+///
 /// parameters:		<drwg> a drawing object
 /// result:			none
 ///
@@ -227,8 +227,8 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 		DKViewController*  mainViewController = [self makeControllerForView:[self mainView]];
 		[[self drawing] addController:mainViewController];
 	}
-
-#if qGlobalUndoManager	
+    
+#if qGlobalUndoManager
 	[self setUndoManager:[[self class] sharedDrawkitUndoManager]];
 #endif
 	
@@ -243,9 +243,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			drawing
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	return the document's drawing object
-/// 
+///
 /// parameters:		none
 /// result:			the document's drawing object
 ///
@@ -265,9 +265,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			makeControllerForView:
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	create a controller object to connect the given view to the document's drawing
-/// 
+///
 /// parameters:		<aView> the view the controller will be used with
 /// result:			a new controller object
 ///
@@ -297,9 +297,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			makeDefaultDrawing
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	create a drawing object to be used when the document is not opened from a file on disk
-/// 
+///
 /// parameters:		none
 /// result:			a default drawing object
 ///
@@ -310,23 +310,23 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 - (DKDrawing*)			makeDefaultDrawing
 {
 	// set up a default drawing - this is A2 in size, landscape orientation, has grid, guids and one drawing layer, which is made active
-		
+    
 	DKDrawing* dr = [[DKDrawing alloc] initWithSize:[DKDrawing isoA2PaperSize:NO]];
-
+    
 	// attach a grid layer
 	[DKGridLayer setDefaultGridThemeColour:[[NSColor brownColor] colorWithAlphaComponent:0.5]];
 	DKGridLayer* grid = [[DKGridLayer alloc] init];
 	[dr addLayer:grid];
 	[grid tweakDrawingMargins];
 	[grid release];
-
+    
 	// attach a drawing layer and make it the active layer
-
+    
 	DKObjectDrawingLayer*	layer = [[[self classOfDefaultDrawingLayer] alloc] init];
 	[dr addLayer:layer];
 	[dr setActiveLayer:layer];
 	[layer release];
-
+    
 	// optional info layer
 	
 	if([self wantsInfoLayer])
@@ -338,7 +338,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	}
 	
 	// attach a guide layer
-
+    
 	DKGuideLayer*	guides = [[DKGuideLayer alloc] init];
 	[dr addLayer:guides];
 	[guides release];
@@ -350,9 +350,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			classOfDefaultDrawingLayer
 /// scope:			public method
-/// overrides:		
+/// overrides:
 /// description:	return the class of the layer for New Layer and default drawing construction.
-/// 
+///
 /// parameters:		none
 /// result:			the class of the default drawing layer
 ///
@@ -372,9 +372,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			wantsInfoLayer
 /// scope:			public method
-/// overrides:		
+/// overrides:
 /// description:	return whether an info layer should be added to the default drawing.
-/// 
+///
 /// parameters:		none
 /// result:			YES, by default
 ///
@@ -394,9 +394,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			newDrawingLayer:
 /// scope:			public action method
-/// overrides:		
+/// overrides:
 /// description:	high-level method to add a new drawing layer to the document
-/// 
+///
 /// parameters:		<sender> the sender of the message
 /// result:			none
 ///
@@ -406,8 +406,8 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 - (IBAction)			newDrawingLayer:(id) sender
 {
-	#pragma unused (sender)
-
+#pragma unused (sender)
+    
 	// high level action to add a new drawing layer to the drawing and make it active
 	
 	DKDrawing* dr = [self drawing];
@@ -424,9 +424,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			newLayerWithSelection:
 /// scope:			public action method
-/// overrides:		
+/// overrides:
 /// description:	high-level method to add a new drawing layer to the document and move the selected objects to it
-/// 
+///
 /// parameters:		<sender> the sender of the message
 /// result:			none
 ///
@@ -437,7 +437,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 - (IBAction)			newLayerWithSelection:(id) sender
 {
-	#pragma unused (sender)
+#pragma unused (sender)
 	
 	// high-level action adds a new drawing layer and moves the currently selected objects to it
 	// if the selection is empty or the current active layer is not an object layer, does nothing
@@ -454,7 +454,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 			
 			DKDrawing* dr = [self drawing];
 			DKObjectDrawingLayer*	layer = [[[self classOfDefaultDrawingLayer] alloc] init];
-	
+            
 			[dr addLayer:layer andActivateIt:YES];
 			
 			// move objects to it and select them
@@ -486,9 +486,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			deleteActiveLayer:
 /// scope:			public action method
-/// overrides:		
+/// overrides:
 /// description:	high-level method to delete the active layer from the drawing
-/// 
+///
 /// parameters:		<sender> the sender of the message
 /// result:			none
 ///
@@ -498,7 +498,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 - (IBAction)			deleteActiveLayer:(id) sender
 {
-	#pragma unused (sender)
+#pragma unused (sender)
 	
 	DKLayer* layer = [[self drawing] activeLayer];
 	
@@ -517,10 +517,10 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			remergeStyles:readFromURL:
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	the first step in reconsolidating a newly opened document's registered styles with the current
 ///					style registry.
-/// 
+///
 /// parameters:		<stylesToMerge> a set of styles loaded with the document that are flagged as having been registered
 ///					at the time the document was saved. Note that this method isn't called if there are no such styles.
 ///					<url> the url from whence the document was loaded (ignored by default)
@@ -534,7 +534,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 - (void)				remergeStyles:(NSSet*) stylesToMerge readFromURL:(NSURL*) url
 {
-	#pragma unused(url)
+#pragma unused(url)
 	
 	NSAssert( stylesToMerge != nil, @"attempt to remerge a nil set");
 	
@@ -581,10 +581,10 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			replaceDocumentStylesWithMatchingStylesFromSet:
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	the second step in reconsolidating a newly opened document's registered styles with the current
 ///					style registry.
-/// 
+///
 /// parameters:		<aSetOfStyles> the styles returned from the registry that should replace those in the document
 /// result:			none
 ///
@@ -605,7 +605,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	
 	// n.b. all undos arising from this operation are discarded - there's no good reason to undo stuff that is really part
 	// of the initialisation
-
+    
 	[[self undoManager] removeAllActions];
 	
 	/// should the document be dirtied anyway? NO for now.
@@ -618,13 +618,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			documentStyleCategoryName
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	returns a name that can be used for a style registry category for this document
-/// 
+///
 /// parameters:		none
 /// result:			a string - just the document's filename without the extension or other path components
 ///
-/// notes:			
+/// notes:
 ///
 ///********************************************************************************************************************
 
@@ -640,13 +640,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			allStyles
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	returns all styles used by the document's drawing
-/// 
+///
 /// parameters:		none
 /// result:			a set of all styles in the drawing
 ///
-/// notes:			
+/// notes:
 ///
 ///********************************************************************************************************************
 
@@ -660,9 +660,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			allRegisteredStyles
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	returns all registered styles used by the document's drawing
-/// 
+///
 /// parameters:		none
 /// result:			a set of all registered styles in the drawing
 ///
@@ -682,9 +682,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			setDrawingTool:
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	sets the main view's drawing tool to the given tool
-/// 
+///
 /// parameters:		<aTool> a drawing tool object
 /// result:			none
 ///
@@ -705,9 +705,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			drawingTool
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	returns the main view's current drawing tool
-/// 
+///
 /// parameters:		none
 /// result:			a drawing tool object, if any
 ///
@@ -726,9 +726,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 /// method:			makePrintDrawingView
 /// scope:			public instance method
-/// overrides:		
+/// overrides:
 /// description:	creates a view used to handle printing.
-/// 
+///
 /// parameters:		none
 /// result:			a view suitable for printing the document's drawing
 ///
@@ -755,7 +755,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	return the data to save when this document is written to disk.
-/// 
+///
 /// parameters:		<typename> the type of data to write (ignored)
 ///					<outError> an error, if it wasn't successful
 /// result:			the data to be written to disk
@@ -765,7 +765,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				dataOfType:(NSString*) typeName error:(NSError**) outError
+- (NSData*)dataOfType:(NSString*)typeName error:(NSError**)outError
 {
 	NSData* theData = nil;
 	
@@ -785,9 +785,9 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 				theData = [[self drawing] performSelector:selector];
 		}
 	}
-
+    
 	// throw an error if the data is nil
-
+    
 	if ( theData == nil )
 	{
 		if( outError )
@@ -806,7 +806,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	set up the document in its initial state for the "New" command.
-/// 
+///
 /// parameters:		<typename> the type of data that the document is created to handle (ignored)
 ///					<outError> an error, if it wasn't successful
 /// result:			the document object
@@ -815,7 +815,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (id)					initWithType:(NSString*) typeName error:(NSError**) outError
+- (id)initWithType:(NSString*)typeName error:(NSError**)outError
 {
 	LogEvent_(kLifeEvent, @"initialising default drawing, type = '%@'", typeName );
 	
@@ -837,11 +837,11 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	implements the print command.
-/// 
+///
 /// parameters:		<flag> YES to show the print panel
 /// result:			none
 ///
-/// notes:			
+/// notes:
 ///
 ///********************************************************************************************************************
 
@@ -872,7 +872,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	initialises the document from a file on disk when opened from the "Open" command.
-/// 
+///
 /// parameters:		<absoluteURL> the url being read
 ///					<typename> the type of data to load
 ///					<error> the error if not successful
@@ -906,13 +906,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 		// having loaded the drawing and fully dearchived it, we need to remerge styles in the document with the style registry.
 		// what happens here will depend on the application design and possibly the user's personal choice. So this is factored out to
 		// allow an easy override. The default method blindly remerges the styles from the document back into the registry.
-
+        
 		NSSet* stylesToMerge = [[self drawing] allRegisteredStyles];	// after a file load, this method returns a special set THIS ONCE ONLY
 		
 		if ( stylesToMerge != nil && [stylesToMerge count] > 0 )
 			[self remergeStyles:stylesToMerge readFromURL:nil];
-
-		 return YES;
+        
+        return YES;
 	}
 	else
 	{
@@ -929,7 +929,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	sets the printing info
-/// 
+///
 /// parameters:		<printInfo> the printing info
 /// result:			none
 ///
@@ -952,7 +952,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 /// scope:			public instance method
 /// overrides:		NSDocument
 /// description:	called when the window controller finished loading the window's nib
-/// 
+///
 /// parameters:		<windowController> the window controller
 /// result:			none
 ///
@@ -962,7 +962,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 - (void)				windowControllerDidLoadNib:(NSWindowController*) windowController
 {
-	#pragma unused (windowController)
+#pragma unused (windowController)
 	
 	//Note - if you override this, be sure to call super's implementation to ensure the drawing/controller/view system is established
 	
@@ -971,7 +971,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	// after instantiation from a nib, this hooks up the main view through a controller to the drawing. Note - to test
 	// automatic back-end creation, this can be temporarily commented out - it leaves the view unconnected so that it will
 	// create its own back end when it is first asked to draw.
-
+    
 #ifndef qTestAutoBackendCreation
 	
 	if ( [self mainView] != nil && [self drawing] != nil )
@@ -979,7 +979,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 		DKViewController*  mainViewController = [self makeControllerForView:[self mainView]];
 		[[self drawing] addController:mainViewController];
 	}
-
+    
 #endif
 	
 	
@@ -1008,7 +1008,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 		[dkum enableUndoTaskCoalescing:YES];
 		[self setUndoManager:(id)dkum];
 		[dkum release];
-#endif		
+#endif
 		// bind the standard drawing types to the usual methods
 		
 		[[self class] bindFileExportType:kDKDrawingDocumentType toSelector:@selector(drawingData)];
@@ -1024,7 +1024,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 
 - (void)		dealloc
-{	
+{
  	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	// set drawing's undo manager to nil prior to document dealloc so that any other refs to the drawing don't cause
