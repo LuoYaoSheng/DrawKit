@@ -67,12 +67,12 @@
 
 @end
 
-extern NSString*		kDKDrawingDocumentType;
-extern NSString*		kDKDrawingDocumentUTI;
-extern NSString*		kDKDrawingDocumentXMLType;
-extern NSString*		kDKDrawingDocumentXMLUTI;
+extern NSString * const     kDKDrawingDocumentType;
+extern NSString * const     kDKDrawingDocumentUTI;
+extern NSString * const		kDKDrawingDocumentXMLType;
+extern NSString * const		kDKDrawingDocumentXMLUTI;
 
-extern NSString*		kDKDocumentLevelsOfUndoDefaultsKey;
+extern NSString * const		kDKDocumentLevelsOfUndoDefaultsKey;
 
 
 #define DEFAULT_LEVELS_OF_UNDO		24

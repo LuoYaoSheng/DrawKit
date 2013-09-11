@@ -33,12 +33,12 @@
 
 #pragma mark Constants (Non-localized)
 
-const NSString*		kDKDrawingDocumentType				= @"Drawing";
-const NSString*		kDKDrawingDocumentUTI				= @"net.apptree.drawing";
-const NSString*		kDKDrawingDocumentXMLType			= @"xml_drawing";
-const NSString*		kDKDrawingDocumentXMLUTI			= @"net.apptree.xmldrawing";
+NSString * const kDKDrawingDocumentType				= @"Drawing";
+NSString * const kDKDrawingDocumentUTI				= @"net.apptree.drawing";
+NSString * const kDKDrawingDocumentXMLType			= @"xml_drawing";
+NSString * const kDKDrawingDocumentXMLUTI			= @"net.apptree.xmldrawing";
 
-const NSString*		kDKDocumentLevelsOfUndoDefaultsKey	= @"kDKDocumentLevelsOfUndo";
+NSString * const kDKDocumentLevelsOfUndoDefaultsKey	= @"kDKDocumentLevelsOfUndo";
 
 
 #define	qGlobalUndoManager		0
@@ -982,11 +982,10 @@ static NSMutableDictionary*		sFileExportBindings = nil;
     
 #endif
 	
-	
 }
 
 
-- (NSString*)			windowNibName
+- (NSString*)windowNibName
 {
 	return @"DKDrawingDocument";
 }
@@ -998,7 +997,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 #define USE_DK_UNDO_MANAGER		1
 
-- (id)			init
+- (id)init
 {
     self = [super init];
  	if (self != nil)
