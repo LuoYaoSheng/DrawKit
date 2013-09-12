@@ -66,7 +66,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (NSUndoManager*)		sharedDrawkitUndoManager
++ (NSUndoManager *)sharedDrawkitUndoManager;
 {
 	static DKUndoManager* s_um = nil;
 	
@@ -95,7 +95,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)bindFileImportType:(NSString*) fileType toSelector:(SEL) aSelector
++ (void)bindFileImportType:(NSString *)fileType toSelector:(SEL)aSelector
 {
 	NSAssert( fileType != nil, @"cannot bind a nil fileType");
 	
@@ -130,7 +130,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)bindFileExportType:(NSString*) fileType toSelector:(SEL) aSelector
++ (void)bindFileExportType:(NSString *)fileType toSelector:(SEL)aSelector
 {
 	NSAssert( fileType != nil, @"cannot bind a nil fileType");
     
@@ -161,7 +161,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)				setDefaultLevelsOfUndo:(NSUInteger) levels
++ (void)setDefaultLevelsOfUndo:(NSUInteger)levels
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:levels forKey:kDKDocumentLevelsOfUndoDefaultsKey];
 }
@@ -181,7 +181,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-+ (NSUInteger)			defaultLevelsOfUndo
++ (NSUInteger)defaultLevelsOfUndo
 {
 	NSUInteger levels = [[NSUserDefaults standardUserDefaults] integerForKey:kDKDocumentLevelsOfUndoDefaultsKey];
 	
@@ -209,14 +209,15 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setDrawing:(DKDrawing*) drwg
+- (void)setDrawing:(DKDrawing *)drawin
 {
 	// sets the drawing to <drwg>.
 	
-	[drwg retain];
-	[m_drawing release];	// also removes and releases all existing controllers
-	m_drawing = drwg;
-	[m_drawing setOwner:self];
+    
+	[drawin retain];
+	[_drawing release];	// also removes and releases all existing controllers
+	_drawing = drawin;
+	[_drawing setOwner:self];
 	
 	// create a controller for the main view and add it to the drawing - often at this stage mainView is nil, so
 	// this step is for when the drawing is recreated sometime after initialisation - e.g. on revert. For the usual
@@ -236,26 +237,6 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	[[self undoManager] setLevelsOfUndo:[[self class] defaultLevelsOfUndo]];
 	
 	LogEvent_(kReactiveEvent, @"undo mgr = %@", [self undoManager]);
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			drawing
-/// scope:			public instance method
-/// overrides:
-/// description:	return the document's drawing object
-///
-/// parameters:		none
-/// result:			the document's drawing object
-///
-/// notes:			the document owns the drawing
-///
-///********************************************************************************************************************
-
-- (DKDrawing*)			drawing
-{
-	return m_drawing;
 }
 
 
@@ -279,7 +260,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (DKViewController*)	makeControllerForView:(NSView*) aView
+- (DKViewController *)makeControllerForView:(NSView*)aView
 {
 	NSAssert( aView != nil, @"attempt to make controller when view is nil");
 	
@@ -362,7 +343,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (Class)				classOfDefaultDrawingLayer
+- (Class)classOfDefaultDrawingLayer
 {
 	return [DKObjectDrawingLayer class];
 }
@@ -815,21 +796,22 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (id)initWithType:(NSString*)typeName error:(NSError**)outError
+- (id)initWithType:(NSString *)typeName error:(NSError **)outError
 {
 	LogEvent_(kLifeEvent, @"initialising default drawing, type = '%@'", typeName );
 	
-	[super initWithType:typeName error:outError];
-	
-	// create a default drawing. Note that the fileType is ignored. It creates the default drawing regardless of type - if
-	// your document needs to be sensitive to the type, override this.
-	
-	DKDrawing* dr = [self makeDefaultDrawing];
-	[self setDrawing:dr];
-	
+	self = [super initWithType:typeName error:outError];
+    if (self) {
+        
+        // create a default drawing. Note that the fileType is ignored. It creates the default drawing regardless of type - if
+        // your document needs to be sensitive to the type, override this.
+        
+        DKDrawing* dr = [self makeDefaultDrawing];
+        [self setDrawing:dr];
+    }
+    
 	return self;
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -845,7 +827,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				printShowingPrintPanel:(BOOL) flag
+- (void)printShowingPrintPanel:(BOOL) flag
 {
 	DKDrawingView*		pdv = [[self makePrintDrawingView] retain];
 	DKViewController*	vc = [pdv makeViewController];
@@ -882,13 +864,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				readFromData:(NSData*) data ofType:(NSString*) typeName error:(NSError **)outError
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError;
 {
-	DKDrawing*	theDrawing = nil;
+	DKDrawing *theDrawing = nil;
 	
 	if ( sFileImportBindings != nil )
 	{
-		DKSelectorWrapper* wrapper = [sFileImportBindings objectForKey:typeName];
+		DKSelectorWrapper *wrapper = [sFileImportBindings objectForKey:typeName];
 		
 		if( wrapper )
 		{
@@ -937,7 +919,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setPrintInfo:(NSPrintInfo*) printInfo
+- (void)setPrintInfo:(NSPrintInfo *)printInfo
 {
 	[super setPrintInfo:printInfo];
 	[self.mainView setPrintInfo:printInfo];
@@ -960,7 +942,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				windowControllerDidLoadNib:(NSWindowController*) windowController
+- (void)windowControllerDidLoadNib:(NSWindowController *)windowController
 {
 #pragma unused (windowController)
 	
@@ -984,12 +966,10 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	
 }
 
-
-- (NSString*)windowNibName
+- (NSString *)windowNibName
 {
 	return @"DKDrawingDocument";
 }
-
 
 #pragma mark -
 #pragma mark As an NSObject
@@ -1022,7 +1002,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 }
 
 
-- (void)		dealloc
+- (void)dealloc;
 {
  	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
@@ -1030,13 +1010,13 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 	// a problem with a stale undo mgr ref when the drawing is dealloced
 	
 	[[self drawing] setUndoManager:nil];
-	[m_drawing setOwner:nil];
-	[m_drawing release];
+	[self.drawing setOwner:nil];
+	[_drawing release];
 	[super dealloc];
 }
 
 
-- (BOOL)		validateMenuItem:(NSMenuItem*) item
+- (BOOL)validateMenuItem:(NSMenuItem *)item
 {
 	SEL action = [item action];
 	
@@ -1068,7 +1048,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 
 @implementation DKSelectorWrapper
 
-+ (DKSelectorWrapper*)	wrapperWithSelector:(SEL) aSelector
++ (DKSelectorWrapper *)wrapperWithSelector:(SEL)aSelector
 {
 	NSAssert( aSelector != NULL, @"can't create selector wrapper for NULL");
 	
@@ -1078,7 +1058,7 @@ static NSMutableDictionary*		sFileExportBindings = nil;
 }
 
 
-- (SEL)					selector
+- (SEL)selector
 {
 	return mSelector;
 }

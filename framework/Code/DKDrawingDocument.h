@@ -1,14 +1,14 @@
-///**********************************************************************************************************************************
-///  DKDrawDocument.h
-///  DrawKit ©2005-2008 Apptree.net
 //
-///
-///  Created by Graham Cox on 15/10/2006.
-///  Updated and refactored by Stephan Zehrer 2013
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//  DKDrawDocument.h
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 15/10/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+
 
 #import <Cocoa/Cocoa.h>
 
@@ -18,7 +18,7 @@
 {
 @private
 	//IBOutlet DKDrawingView*	mMainDrawingView;
-	DKDrawing*				m_drawing;
+	//DKDrawing*				m_drawing;
 }
 
 ///*********************************************************************************************************************
@@ -31,7 +31,7 @@
 ///					isn't required to have an outlet to the main view but it makes setting everything up easier.
 ///
 ///********************************************************************************************************************
-@property (nonatomic, strong) IBOutlet DKDrawingView* mainView;
+@property (nonatomic, strong) IBOutlet DKDrawingView *mainView;
 
 + (NSUndoManager*)		sharedDrawkitUndoManager;
 
@@ -41,8 +41,7 @@
 + (void)				setDefaultLevelsOfUndo:(NSUInteger) levels;
 + (NSUInteger)			defaultLevelsOfUndo;
 
-- (void)				setDrawing:(DKDrawing*) drwg;
-- (DKDrawing*)			drawing;
+@property (nonatomic, strong) DKDrawing *drawing;
 
 - (DKViewController*)	makeControllerForView:(NSView*) aView;
 - (DKDrawing*)			makeDefaultDrawing;
