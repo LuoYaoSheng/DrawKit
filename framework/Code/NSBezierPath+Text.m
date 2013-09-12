@@ -5,8 +5,9 @@
 //  Created by Graham Cox on 05/02/2009.
 //  Copyright 2009 Apptree.net. All rights reserved.
 //
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 
-#import "NSBezierPath+Text.h"
 #import "NSBezierPath+Geometry.h"
 #import "NSBezierPath+Editing.h"
 #import "DKGeometryUtilities.h"
@@ -14,7 +15,7 @@
 #import "DKBezierLayoutManager.h"
 #include <tgmath.h>
 
-
+#import "NSBezierPath+Text.h"
 
 @interface NSBezierPath (TextOnPathPrivate)
 
@@ -771,7 +772,7 @@ static NSDictionary*	s_TOPTextAttributes = nil;
 	// see if the path we need is cached, in which case we can avoid recomputing it. Because there could be several different paths that apply to ranges,
 	// the cache key is generated from the various parameters
 	
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 	NSString* pathKey = [NSString stringWithFormat:@"DKUnderlinePath_%@_%.2f", NSStringFromRange( range ), dy];
 	ulp = [cache objectForKey:pathKey];
 	
@@ -807,7 +808,7 @@ static NSDictionary*	s_TOPTextAttributes = nil;
 		// be possible.
 		
 		NSArray* descenderBreaks;
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 		NSString* breaksKey = [NSString stringWithFormat:@"DKUnderlineBreaks_%@_%.2f", NSStringFromRange( range ), ulOffset];
 		descenderBreaks = [cache objectForKey:breaksKey];
 		
@@ -1355,7 +1356,7 @@ static NSDictionary*	s_TOPTextAttributes = nil;
 		p = [self pointOnPathAtLength:distance slope:&slope];
 		
 		if( alt && (( count & 1 ) == 1 ))
-			slope += pi;
+			slope += M_PI;
 		
 		temp = [path copy];
 		
