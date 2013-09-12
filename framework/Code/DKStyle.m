@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKStyle.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 13/08/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+// DKStyle.m
+// DrawKit ©2005-2008 Apptree.net
+//
+// Created by Graham Cox on 13/08/2006.
+//
+//	This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKStyle.h"
 #import "DKStyleRegistry.h"
@@ -1756,12 +1758,11 @@ static BOOL					sSubstitute = NO;
 ///
 ///********************************************************************************************************************
 
-- (NSString*)			swatchCacheKeyForSize:(NSSize) size type:(DKStyleSwatchType) type
+- (NSString *)swatchCacheKeyForSize:(NSSize)size type:(DKStyleSwatchType)type
 {
-#warning 64BIT: Inspect use of long
+//#warning 64BIT: Inspect use of long
 	return [NSString stringWithFormat:@"%@_%ld", NSStringFromSize( size ), (long)type];
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -2204,7 +2205,7 @@ static BOOL					sSubstitute = NO;
 }
 
 
-- (void)				dealloc
+- (void)dealloc
 {
 	LogEvent_( kKVOEvent, @"style %@ ('%@') is being deallocated, will stop observing all components", self, [self name]);
 	
@@ -2221,7 +2222,7 @@ static BOOL					sSubstitute = NO;
 }
 
 
-- (id)					init
+- (id)init
 {
 	self = [super init];
 	if (self != nil)
@@ -2247,15 +2248,15 @@ static BOOL					sSubstitute = NO;
 	return self;
 }
 
-- (NSString*)			description
+- (NSString *)description;
 {
-#warning 64BIT: Check formatting arguments
-	return [NSString stringWithFormat:@"%@ <0x%x> '%@' [%@]", NSStringFromClass([self class]), self, [self name], [self uniqueKey]];
+    // TODO: removed self <0x%x>  - self  , this lead to a endless loop
+	return [NSString stringWithFormat:@"%@  '%@' [%@]", NSStringFromClass([self class]), [self name], [self uniqueKey]];
 }
 
 // n.b. isEqual: defines equality more loosely than isEqualToStyle: which also considers the timestamp
 
-- (BOOL)				isEqual:(id) anObject
+- (BOOL)isEqual:(id)anObject;
 {
 	if([anObject respondsToSelector:@selector(uniqueKey)])
 		return [[self uniqueKey] isEqualToString:[anObject uniqueKey]];
@@ -2263,8 +2264,7 @@ static BOOL					sSubstitute = NO;
 		return NO;
 }
 
-
-- (NSUInteger)			hash
+- (NSUInteger)hash
 {
 	return [[self uniqueKey] hash];
 }
