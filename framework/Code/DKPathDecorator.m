@@ -1,12 +1,13 @@
-///**********************************************************************************************************************************
-///  DKPathDecorator.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 17/06/2007.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKPathDecorator.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 17/06/2007.
+//
+//	This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 
 #import "DKPathDecorator.h"
 
@@ -341,7 +342,7 @@
 	// return a value in 0..1 given a value in 0..1 which is used to set the curvature of the leadin and lead out ramps
 	// (for a linear ramp, return val)
 	
-	return 0.5 * ( 1 - cosf( fmod( val, 1.0 ) * pi ));
+	return 0.5 * ( 1 - cosf( fmod( val, 1.0 ) * M_PI ));
 }
 
 
@@ -453,7 +454,7 @@
 		// this has no effect except if the alternating flag is also set it flips every other image.
 		
 		if(( mPlacementCount & 1 ) && mAlternateLateralOffsets)
-			slope += pi;
+			slope += M_PI;
 		
 		CGFloat dx = mLateralOffset * cosf( slope + HALF_PI );
 		CGFloat dy = mLateralOffset * sinf( slope + HALF_PI );
