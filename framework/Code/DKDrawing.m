@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKDrawing.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 14/08/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKDrawing.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 14/08/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKDrawing.h"
 #import "DKDrawing+Paper.h"
@@ -115,7 +117,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-+ (NSString*)				drawkitReleaseStatus
++ (NSString *)drawkitReleaseStatus;
 {
 	return @"beta";
 }
@@ -147,7 +149,7 @@ static id	sDearchivingHelper = nil;
 	else if([status isEqualToString:@"alpha"])
 		s = 'a';
 	
-#warning 64BIT: Inspect use of long
+//#warning 64BIT: Inspect use of long
 	return [NSString stringWithFormat:@"%ld.%ld.%c%ld", (long)(v & 0xFF00) >> 8, (long)(v & 0xF0) >> 4, s, (long)( v & 0x0F )];
 }
 
@@ -365,9 +367,8 @@ static id	sDearchivingHelper = nil;
 	[di setObject:[NSNumber numberWithInteger:revision] forKey:[kDKDrawingInfoDrawingRevision lowercaseString]];
 	[di setObject:prefix forKey:[kDKDrawingInfoDrawingPrefix lowercaseString]];
 	[di setObject:[NSNumber numberWithInteger:drawingNumber] forKey:[kDKDrawingInfoDrawingNumberUnformatted lowercaseString]];
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Inspect use of long
+//#warning 64BIT: Check formatting arguments
 	[di setObject:[NSString stringWithFormat:@"%@-%06ld-%04ld", prefix, (long)drawingNumber, (long)revision] forKey:[kDKDrawingInfoDrawingNumber lowercaseString]];
 	
 	[di setObject:[NSFullUserName() capitalizedString] forKey:[kDKDrawingInfoDraughter lowercaseString]];
@@ -508,43 +509,6 @@ static id	sDearchivingHelper = nil;
 	
 	return dwg;
 }
-
-
-///*********************************************************************************************************************
-///
-/// method:			saveDefaults
-/// scope:			public class method
-/// description:	saves the static class defaults for ALL classes in the drawing system
-/// 
-/// parameters:		none
-/// result:			none
-///
-/// notes:			Deprecated - no longer does anything
-///
-///********************************************************************************************************************
-
-+ (void)				saveDefaults
-{
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			loadDefaults
-/// scope:			public class method
-/// description:	loads the static user defaults for all classes in the drawing system
-/// 
-/// parameters:		none
-/// result:			none
-///
-/// notes:			Deprecated - no longer does anything
-///
-///********************************************************************************************************************
-
-+ (void)				loadDefaults
-{
-}
-
 
 #pragma mark -
 #pragma mark - designated initializer
@@ -1167,49 +1131,9 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				synchronizeRulersWithUnits:(NSString*) unitString
+- (void)synchronizeRulersWithUnits:(NSString*) unitString
 {
 	[[self controllers] makeObjectsPerformSelector:@selector(synchronizeViewRulersWithUnits:) withObject:unitString];
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			setDelegate:
-/// scope:			public method
-/// overrides:
-/// description:	sets the delegate
-/// 
-/// parameters:		<aDelegate> some delegate object
-/// result:			none
-///
-/// notes:			see header for possible delegate methods
-///
-///********************************************************************************************************************
-
-- (void)				setDelegate:(id) aDelegate
-{
-	mDelegateRef = aDelegate;
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			delegate
-/// scope:			public method
-/// overrides:
-/// description:	return the delegate
-/// 
-/// parameters:		none 
-/// result:			some delegate object
-///
-/// notes:			see header for possible delegate methods
-///
-///********************************************************************************************************************
-
-- (id)					delegate
-{
-	return mDelegateRef;
 }
 
 #pragma mark -
@@ -1399,13 +1323,13 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)					setDynamicQualityModulationEnabled:(BOOL) qmEnabled
+- (void)setDynamicQualityModulationEnabled:(BOOL) qmEnabled
 {
 	m_qualityModEnabled = qmEnabled;
 }
 
 
-- (BOOL)					dynamicQualityModulationEnabled
+- (BOOL)dynamicQualityModulationEnabled
 {
 	return m_qualityModEnabled;
 }
@@ -2331,7 +2255,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (CGFloat)			convertLength:(CGFloat) len
+- (CGFloat)convertLength:(CGFloat) len
 {
 	CGFloat length = [[self gridLayer] gridDistanceForQuartzDistance:len];
 	
@@ -2357,7 +2281,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSPoint)			convertPoint:(NSPoint) pt
+- (NSPoint)convertPoint:(NSPoint) pt
 {
 	NSPoint cpt = [[self gridLayer] gridLocationForPoint:pt];
 	
@@ -2390,7 +2314,7 @@ static id	sDearchivingHelper = nil;
 	if([[self delegate] respondsToSelector:@selector(drawing:willReturnFormattedCoordinateForDistance:)])
 		return [[self delegate] drawing:self willReturnFormattedCoordinateForDistance:length];
 	else
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 		return [NSString stringWithFormat:@"%.2f %@", length, [self abbreviatedDrawingUnits]];
 }
 
@@ -2426,10 +2350,10 @@ static id	sDearchivingHelper = nil;
 	}
 	else
 	{
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 		fmt = [NSString stringWithFormat:@"%.2f %@", cpt.x, [self abbreviatedDrawingUnits]];
 		[array addObject:fmt];
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 		fmt = [NSString stringWithFormat:@"%.2f %@", cpt.y, [self abbreviatedDrawingUnits]];
 		[array addObject:fmt];
 	}
@@ -2519,9 +2443,9 @@ static id	sDearchivingHelper = nil;
 	
 	[[self drawingInfo] setObject:[self abbreviatedDrawingUnits] forKey:[kDKDrawingInfoDimensionsShortUnits lowercaseString]];
 	[[self drawingInfo] setObject:[self drawingUnits] forKey:[kDKDrawingInfoDimensionsUnits lowercaseString]];
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 	[[self drawingInfo] setObject:[NSString stringWithFormat:@"%f", ds.width] forKey:[[NSString stringWithFormat:@"%@.size_width", kDKDrawingInfoDrawingDimensions] lowercaseString]];
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 	[[self drawingInfo] setObject:[NSString stringWithFormat:@"%f", ds.height] forKey:[[NSString stringWithFormat:@"%@.size_height", kDKDrawingInfoDrawingDimensions] lowercaseString]];
 	
 	[[self undoManager] enableUndoRegistration];
@@ -2782,7 +2706,7 @@ static id	sDearchivingHelper = nil;
 		if ( k == NSNotFound )
 			found = NO;
 		else
-#warning 64BIT: Inspect use of long
+//#warning 64BIT: Inspect use of long
 			temp = [NSString stringWithFormat:@"%@ %ld", aName, (long)++numeral];
 	}
 	
@@ -3076,7 +3000,7 @@ static id	sDearchivingHelper = nil;
 #pragma mark -
 #pragma mark As an NSObject
 
-- (void)				dealloc
+- (void)dealloc
 {
 	LogEvent_( kLifeEvent, @"deallocating DKDrawing %@", self );
 	
@@ -3088,7 +3012,7 @@ static id	sDearchivingHelper = nil;
 	[mControllers release];
 	
 	m_activeLayerRef = nil;
-	mDelegateRef = nil;
+	self.delegate = nil;
 	
 	if (m_renderQualityTimer != nil)
 	{

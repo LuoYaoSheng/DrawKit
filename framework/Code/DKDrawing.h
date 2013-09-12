@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKDrawing.h
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 14/08/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKDrawing.h
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 14/08/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKLayerGroup.h"
 
@@ -41,7 +43,6 @@
 	NSRect					m_lastRectUpdated;		// for refresh in HQ mode
 	NSMutableSet*			mControllers;			// the set of current controllers
 	DKImageDataManager*		mImageManager;			// internal object used to substantially improve efficiency of image archiving
-	id						mDelegateRef;			// delegate, if any
 	id						mOwnerRef;				// back pointer to document or view that owns this
 }
 
@@ -103,8 +104,7 @@
 
 // setting the delegate:
 
-- (void)					setDelegate:(id) aDelegate;
-- (id)						delegate;
+@property (nonatomic, strong) id delegate;
 
 // the drawing's view controllers
 
@@ -269,8 +269,6 @@ extern NSString*		kDKDrawingUnitAbbreviationsUserDefault;	// NSDictionary
 
 + (DKDrawing*)			drawingWithContentsOfFile:(NSString*) filepath;
 + (DKDrawing*)			drawingWithData:(NSData*) drawingData fromFileAtPath:(NSString*) filepath;
-+ (void)				saveDefaults;
-+ (void)				loadDefaults;
 
 @end
 
