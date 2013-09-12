@@ -35,6 +35,6 @@ NSBezierPath*		smartCurveFitPath( NSBezierPath* inPath, float epsilon, float cor
 #endif
 
 
-#define kDKDefaultCornerThreshold		(pi / 6)
+#define kDKDefaultCornerThreshold		(M_PI / 6)
 
 #endif /* defined(qUseCurveFit) */
