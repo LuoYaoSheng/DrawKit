@@ -5,8 +5,9 @@
 //  Created by Graham Cox on 4/09/09.
 //  Copyright 2009 Apptree.net. All rights reserved.
 //
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 
-#import "DKHandle.h"
 #import "DKBoundingRectHandle.h"
 #import "DKPathPointHandle.h"
 #import "DKRotationHandle.h"
@@ -15,14 +16,15 @@
 #import "DKQuartzCache.h"
 #import "NSColor+DKAdditions.h"
 
+#import "DKHandle.h"
+
 @interface DKHandle (Private)
 
-+ (NSString*)			keyForKnobType:(DKKnobType) type;
++ (NSString*)keyForKnobType:(DKKnobType) type;
 
 @end
 
 #pragma mark -
-
 
 @implementation DKHandle
 
@@ -30,7 +32,7 @@ static NSMutableDictionary*		s_handleClassTable = nil;
 static NSMutableDictionary*		s_handleInstancesTable = nil;
 
 
-+ (void)				initialize
++ (void)initialize
 {
 	[self setHandleClass:[DKBoundingRectHandle class]		forType:[[DKBoundingRectHandle class] type]];
 	[self setHandleClass:[DKLockedBoundingRectHandle class] forType:[[DKLockedBoundingRectHandle class] type]];
@@ -50,28 +52,24 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 	[self setHandleClass:[DKInactiveBoundingRectHandle class]	forType:kDKHotspotKnobType | kDKKnobIsInactiveFlag];
 }
 
-
-
-+ (DKKnobType)			type
++ (DKKnobType)type
 {
 	NSLog(@"the +[DKHandle type] method must be overridden");
 	
 	return kDKInvalidKnobType;
 }
 
-
-
-+ (DKHandle*)			handleForType:(DKKnobType) type size:(NSSize) size colour:(NSColor*) colour
++ (DKHandle*)handleForType:(DKKnobType)type size:(NSSize)size colour:(NSColor*)color
 {
 	NSString*	classKey = [self keyForKnobType:type];
 	NSString*	key;
 	
-	if( colour )
-#warning 64BIT: Check formatting arguments
-		key = [NSString stringWithFormat:@"%@_%@_%dx%d", classKey, [colour hexString], (NSInteger)ceil(size.width), (NSInteger)ceil(size.height)];
+	if( color )
+//#warning 64BIT: Check formatting arguments
+		key = [NSString stringWithFormat:@"%@_%@_%ldx%ld", classKey, [color hexString], (long)ceil(size.width), (long)ceil(size.height)];
 	else
-#warning 64BIT: Check formatting arguments
-		key = [NSString stringWithFormat:@"%@_%dx%d", classKey, (NSInteger)ceil(size.width), (NSInteger)ceil(size.height)];
+//#warning 64BIT: Check formatting arguments
+		key = [NSString stringWithFormat:@"%@_%ldx%ld", classKey, (long)ceil(size.width), (long)ceil(size.height)];
 
 	DKHandle*	inst = nil;
 	
@@ -85,7 +83,7 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 		Class		hc = [s_handleClassTable objectForKey:classKey];
 		
 		if( hc != Nil )
-			inst = [[hc alloc] initWithSize:size colour:colour];
+			inst = [[hc alloc] initWithSize:size colour:color];
 		
 		if( inst != nil )
 		{
@@ -99,8 +97,7 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 	return inst;
 }
 
-
-+ (void)				setHandleClass:(Class) hClass forType:(DKKnobType) type
++ (void)setHandleClass:(Class) hClass forType:(DKKnobType) type
 {
 	if([hClass superclass] != [self class])
 		return;
@@ -112,97 +109,62 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 	[s_handleClassTable setObject:hClass forKey:key];
 }
 
-
-
-
-+ (NSColor*)			fillColour
++ (NSColor*)fillColour
 {
 	return [NSColor colorWithDeviceRed:0.5 green:0.9 blue:1.0 alpha:1.0];
 }
 
-
-
-+ (NSColor*)			strokeColour
++ (NSColor*)strokeColour
 {
 	return [NSColor blackColor];
 }
 
-
-
-+ (NSBezierPath*)		pathWithSize:(NSSize) size
++ (NSBezierPath*)pathWithSize:(NSSize)size
 {
 	return [NSBezierPath bezierPathWithRect:NSMakeRect( 0, 0, size.width - [self strokeWidth], size.height - [self strokeWidth])];
 }
 
-
-+ (CGFloat)				strokeWidth
++ (CGFloat)strokeWidth
 {
 	return 0.5;
 }
 
-
-+ (CGFloat)				scaleFactor
++ (CGFloat)scaleFactor
 {
 	return 1.0;
 }
 
 #pragma mark -
 
-
-- (id)					initWithSize:(NSSize) size
+- (id)initWithSize:(NSSize)size
 {
 	return [self initWithSize:size colour:nil];
 }
 
-
-- (id)					initWithSize:(NSSize) size colour:(NSColor*) colour
+- (id)initWithSize:(NSSize)size colour:(NSColor*)color
 {
 	self = [super init];
 	if( self )
 	{
-		mSize = size;
-		mSize.width *= [[self class] scaleFactor];
-		mSize.height *= [[self class] scaleFactor];
+		_size = size;
+		_size.width *= [[self class] scaleFactor];
+		_size.height *= [[self class] scaleFactor];
 		
-		mSize.width = ceil( mSize.width );
-		mSize.height = ceil( mSize.height );
+		_size.width = ceil( _size.width );
+		_size.height = ceil( _size.height );
 		
-		[self setColour:colour];
+		[self setColour:color];
 	}
 	
 	return self;
 }
 
-
-
-
-- (NSSize)				size
-{
-	return mSize;
-}
-
-
-- (void)				setColour:(NSColor*) colour
-{
-	[colour retain];
-	[mColour release];
-	mColour = colour;
-}
-
-
-- (NSColor*)			colour
-{
-	return mColour;
-}
-
-
-- (void)				drawAtPoint:(NSPoint) point
+- (void)drawAtPoint:(NSPoint) point
 {
 	[self drawAtPoint:point angle:0];
 }
 
-
-- (void)				drawAtPoint:(NSPoint) point angle:(CGFloat) radians
+- (void)drawAtPoint:(NSPoint)point angle:(CGFloat)radians
 {
 	if( mCache == nil )
 	{
@@ -260,9 +222,7 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 	RESTORE_GRAPHICS_CONTEXT
 }
 
-
-
-- (BOOL)				hitTestPoint:(NSPoint) point inHandleAtPoint:(NSPoint) hp
+- (BOOL)hitTestPoint:(NSPoint)point inHandleAtPoint:(NSPoint)hp
 {
 	NSPoint relPoint;
 	
@@ -273,23 +233,21 @@ static NSMutableDictionary*		s_handleInstancesTable = nil;
 	return [path containsPoint:relPoint];
 }
 
-
 #pragma mark -
 
-+ (NSString*)			keyForKnobType:(DKKnobType) type
++ (NSString*)keyForKnobType:(DKKnobType)type
 {
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 	return [NSString stringWithFormat:@"hnd_type_%d", type];
 }
-
 
 #pragma mark -
 #pragma mark - as a NSObject
 		 
- - (void)	dealloc
+ - (void)dealloc
  {
 	 [mCache release];
-	 [mColour release];
+	 [_colour release];
 	 [super dealloc];
  }
 
