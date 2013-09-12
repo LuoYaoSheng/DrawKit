@@ -1,12 +1,13 @@
-///**********************************************************************************************************************************
-///  NSBezierPath-Editing.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 08/10/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  NSBezierPath-Editing.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 08/10/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 
 #import "NSBezierPath+Editing.h"
 
@@ -23,8 +24,6 @@
 
 #pragma mark Static Vars
 static CGFloat sAngleConstraint = 0.261799387799;	// 15°
-
-
 
 // simple partcode cracking utils:
 
@@ -59,7 +58,7 @@ static inline NSInteger		elementIndexForPartcode( const NSInteger pc );
 {
 	// returns the point opposite p from q at radius r in a straight line.
 	
-	CGFloat	a = atan2f( p.y - q.y, p.x - q.x ) + pi;
+	CGFloat	a = atan2f( p.y - q.y, p.x - q.x ) + M_PI;
 	return NSMakePoint( q.x + ( r * cos( a )), q.y + ( r * sin( a )));
 }
 
@@ -123,14 +122,14 @@ static inline NSInteger		elementIndexForPartcode( const NSInteger pc );
 	
 	if ( outCPA )
 	{
-		outCPA->x = inPoints[1].x + r1 * cos( angle + pi );
-		outCPA->y = inPoints[1].y + r1 * sin( angle + pi );
+		outCPA->x = inPoints[1].x + r1 * cos( angle + M_PI );
+		outCPA->y = inPoints[1].y + r1 * sin( angle + M_PI );
 	}
 	
 	if( outCPB )
 	{
-		outCPB->x = inPoints[1].x - r2 * cos( angle + pi );
-		outCPB->y = inPoints[1].y - r2 * sin( angle + pi );
+		outCPB->x = inPoints[1].x - r2 * cos( angle + M_PI );
+		outCPB->y = inPoints[1].y - r2 * sin( angle + M_PI );
 	}
 }
 
@@ -1266,7 +1265,7 @@ static inline NSInteger		elementIndexForPartcode( const NSInteger pc );
 		[self elementAtIndex:se associatedPoints:ap];
 		[self elementAtIndex:se + 1 associatedPoints:bp];
 	
-		return atan2f( bp[0].y - ap[0].y, bp[0].x - ap[0].x ) + pi;
+		return atan2f( bp[0].y - ap[0].y, bp[0].x - ap[0].x ) + M_PI;
 	}
 	else
 		return 0.0;
