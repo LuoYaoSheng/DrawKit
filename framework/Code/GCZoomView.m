@@ -604,17 +604,32 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 #pragma mark -
 #pragma mark As an NSView
 
+// http://stackoverflow.com/questions/7226239
+
 - (id)initWithFrame:(NSRect)frame;
 {
 	self = [super initWithFrame:frame];
 	if (self != nil)
     {
-		_scale = 1.0;
-		self.minimumScale = 0.025;
-		self.maximumScale = 250.0;
-		
-		mRT = [[DKRetriggerableTimer retriggerableTimerWithPeriod:kDKZoomingRetriggerPeriod target:self selector:@selector(stopScaleChange)] retain];
+        _scale = 1.0;
+        self.minimumScale = 0.025;
+        self.maximumScale = 250.0;
+        
+        mRT = [[DKRetriggerableTimer retriggerableTimerWithPeriod:kDKZoomingRetriggerPeriod target:self selector:@selector(stopScaleChange)] retain];
 	}
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        _scale = 1.0;
+        self.minimumScale = 0.025;
+        self.maximumScale = 250.0;
+        
+        mRT = [[DKRetriggerableTimer retriggerableTimerWithPeriod:kDKZoomingRetriggerPeriod target:self selector:@selector(stopScaleChange)] retain];
+    }
     return self;
 }
 
@@ -624,7 +639,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 	[mRT release];
 	[super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark As part of NSMenuValidation protocol
