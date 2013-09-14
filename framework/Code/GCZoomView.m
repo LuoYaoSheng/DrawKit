@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  GCZoomView.h
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 1/08/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  GCZoomView.h
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 1/08/2006.
+//
+//	This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "GCZoomView.h"
 #import "DKRetriggerableTimer.h"
@@ -47,7 +49,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (void)				setScrollwheelZoomEnabled:(BOOL) enable
++ (void)setScrollwheelZoomEnabled:(BOOL)enable;
 {
 	[[NSUserDefaults standardUserDefaults] setBool:!enable forKey:kDKDrawingDisableScrollwheelZoomPrefsKey];
 }
@@ -66,7 +68,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (BOOL)				scrollwheelZoomEnabled
++ (BOOL)scrollwheelZoomEnabled;
 {
 	return ![[NSUserDefaults standardUserDefaults] boolForKey:kDKDrawingDisableScrollwheelZoomPrefsKey];
 }
@@ -85,7 +87,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (void)				setScrollwheelModiferKeyMask:(NSUInteger) aMask
++ (void)setScrollwheelModiferKeyMask:(NSUInteger)aMask;
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:aMask forKey:kDKScrollwheelModifierKeyMaskPreferenceKey];
 }
@@ -104,7 +106,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (NSUInteger)			scrollwheelModifierKeyMask
++ (NSUInteger)scrollwheelModifierKeyMask;
 {
 	NSUInteger mask = [[NSUserDefaults standardUserDefaults] integerForKey:kDKScrollwheelModifierKeyMaskPreferenceKey];
 	
@@ -129,7 +131,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (void)				setScrollwheelInverted:(BOOL) inverted
++ (void)setScrollwheelInverted:(BOOL)inverted;
 {
 	[[NSUserDefaults standardUserDefaults] setBool:inverted forKey:kDKDrawingScrollwheelSensePrefsKey];
 }
@@ -149,16 +151,12 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-+ (BOOL)				scrollwheelInverted
++ (BOOL)scrollwheelInverted;
 {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:kDKDrawingScrollwheelSensePrefsKey];
 }
 
-
-
-
 #pragma mark -
-
 
 ///*********************************************************************************************************************
 ///
@@ -173,7 +171,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (IBAction)			zoomIn: (id) sender
+- (IBAction)zoomIn:(id)sender;
 {
 	#pragma unused(sender)
 	
@@ -194,7 +192,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (IBAction)			zoomOut: (id) sender
+- (IBAction)zoomOut:(id)sender;
 {
 	#pragma unused(sender)
 	
@@ -215,7 +213,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (IBAction)			zoomToActualSize: (id) sender
+- (IBAction)zoomToActualSize:(id)sender;
 {
 	#pragma unused(sender)
 	
@@ -236,10 +234,9 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (IBAction)			zoomFitInWindow: (id) sender
+- (IBAction)zoomFitInWindow:(id)sender;
 {
 	#pragma unused(sender)
-	
 	// zooms the view to fit within the current window (command/action)
 	NSRect  sfr = [[self superview] frame];
 	[self zoomViewToFitRect:sfr];
@@ -259,7 +256,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (IBAction)			zoomToPercentageWithTag:(id) sender
+- (IBAction)zoomToPercentageWithTag:(id)sender;
 {
 	NSInteger tag = [sender tag];
 	CGFloat ns = (CGFloat) tag / 100.0f;
@@ -267,23 +264,21 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 	[self zoomViewToAbsoluteScale:ns];
 }
 
-
-- (IBAction)			zoomMax:(id) sender
+- (IBAction)zoomMax:(id)sender;
 {
 	#pragma unused(sender)
 	[self zoomViewToAbsoluteScale:[self maximumScale]];
 }
 
 
-- (IBAction)			zoomMin:(id) sender
+- (IBAction)zoomMin:(id)sender;
 {
 	#pragma unused(sender)
 	[self zoomViewToAbsoluteScale:[self minimumScale]];
 }
 
-
-
 #pragma mark -
+
 ///*********************************************************************************************************************
 ///
 /// method:			zoomViewByFactor:
@@ -298,12 +293,11 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomViewByFactor: (CGFloat) factor
+- (void)zoomViewByFactor:(CGFloat)factor;
 {
 	NSPoint p = [self centredPointInDocView];
 	[self zoomViewByFactor:factor andCentrePoint:p];
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -318,11 +312,10 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomViewToAbsoluteScale: (CGFloat) newScale
+- (void)zoomViewToAbsoluteScale:(CGFloat)newScale
 {
 	[self setScale:newScale];
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -338,7 +331,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomViewToFitRect: (NSRect) aRect
+- (void)zoomViewToFitRect:(NSRect)aRect;
 {
 	NSRect  fr = [self frame];
 	
@@ -349,7 +342,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 	
 	[self zoomViewByFactor:MIN( sx, sy )];
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -366,7 +358,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomViewToRect: (NSRect) aRect
+- (void)zoomViewToRect:(NSRect)aRect;
 {
 	NSRect  fr = [(NSClipView*)[self superview] documentVisibleRect];
 	NSPoint cp;
@@ -382,7 +374,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 	[self zoomViewByFactor:MIN( sx, sy ) andCentrePoint:cp];
 }
 
-
 ///*********************************************************************************************************************
 ///
 /// method:			zoomViewToRect:
@@ -397,7 +388,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomViewByFactor: (CGFloat) factor andCentrePoint:(NSPoint) p
+- (void)zoomViewByFactor:(CGFloat)factor andCentrePoint:(NSPoint)p;
 {
 	if ( factor != 1.0 )
 	{
@@ -405,7 +396,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 		[self scrollPointToCentre:p];
 	}
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -421,15 +411,15 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				zoomWithScrollWheelDelta:(CGFloat) delta toCentrePoint:(NSPoint) cp
+- (void)zoomWithScrollWheelDelta:(CGFloat)delta toCentrePoint:(NSPoint)cp;
 {
 	CGFloat factor = ( delta > 0 )? 0.9 : 1.1;
 	
 	[self zoomViewByFactor:factor andCentrePoint:cp ];
 }
 
-
 #pragma mark -
+
 ///*********************************************************************************************************************
 ///
 /// method:			centredPointInDocView
@@ -444,7 +434,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (NSPoint)				centredPointInDocView
+- (NSPoint)centredPointInDocView;
 {
 	NSRect  fr;
 
@@ -455,7 +445,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 		
 	return NSMakePoint(NSMidX( fr ), NSMidY( fr ));
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -470,7 +459,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				scrollPointToCentre:(NSPoint) aPoint
+- (void)scrollPointToCentre:(NSPoint)aPoint;
 {
 	// given a point in view coordinates, the view is scrolled so that the point is centred in the
 	// current document view
@@ -490,7 +479,6 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 	[self scrollPoint:sp];
 }
 
-
 #pragma mark -
 
 ///*********************************************************************************************************************
@@ -506,7 +494,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				setScale:(CGFloat) sc
+- (void)setScale:(CGFloat)sc;
 {
 	if ( sc < [self minimumScale])
 		sc = [self minimumScale];
@@ -523,7 +511,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 		CGFloat	factor = sc / [self scale];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDKDrawingViewWillChangeScale object:self];
-		m_scale = sc;
+		_scale = sc;
 		fr = [self frame];
 		
 		newSize.width = newSize.height = factor;
@@ -535,31 +523,11 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 		[self setFrameSize:fr.size];
 		[self setNeedsDisplay:YES];
 		
-		LogEvent_( kReactiveEvent, @"new view scale = %f", m_scale );
+		LogEvent_( kReactiveEvent, @"new view scale = %f", _scale );
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDKDrawingViewDidChangeScale object:self];
 	}
 }
-
-
-///*********************************************************************************************************************
-///
-/// method:			scale
-/// scope:			public method
-/// description:	returns the current view scale (zoom)
-/// 
-/// parameters:		none
-/// result:			the current scale
-///
-/// notes:			
-///
-///********************************************************************************************************************
-
-- (CGFloat)				scale
-{
-	return m_scale;
-}
-
 
 ///*********************************************************************************************************************
 ///
@@ -578,109 +546,26 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				isChangingScale
-{
-	return mIsChangingScale;
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			setMinimumScale
-/// scope:			public method
-/// description:	sets the minimum permitted view scale (zoom)
-/// 
-/// parameters:		<scmin> the minimum scale
-/// result:			none
-///
-/// notes:			
-///
-///********************************************************************************************************************
-
-- (void)				setMinimumScale:(CGFloat) scmin
-{
-	mMinScale = scmin;
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			minimumScale
-/// scope:			public method
-/// description:	returns the minimum permitted view scale (zoom)
-/// 
-/// parameters:		none
-/// result:			the minimum scale
-///
-/// notes:			
-///
-///********************************************************************************************************************
-
-- (CGFloat)				minimumScale
-{
-	return mMinScale;
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			setMaximumScale
-/// scope:			public method
-/// description:	sets the maximum permitted view scale (zoom)
-/// 
-/// parameters:		<scmax> the maximum scale
-/// result:			none
-///
-/// notes:			
-///
-///********************************************************************************************************************
-
-- (void)				setMaximumScale:(CGFloat) scmax
-{
-	mMaxScale = scmax;
-}
-
-
-///*********************************************************************************************************************
-///
-/// method:			maximumScale
-/// scope:			public method
-/// description:	returns the maximum permitted view scale (zoom)
-/// 
-/// parameters:		none
-/// result:			the maximum scale
-///
-/// notes:			
-///
-///********************************************************************************************************************
-
-- (CGFloat)				maximumScale
-{
-	return mMaxScale;
-}
-
-
 #pragma mark -
 
-- (void)				stopScaleChange
+- (void)stopScaleChange;
 {
-	mIsChangingScale = NO;
+	_isChangingScale = NO;
 	[self setNeedsDisplay:YES];	// redraw in high quality?
 	
 	LogEvent_( kReactiveEvent, @"view stopped changing scale (%f): %@", [self scale], self );
 }
 
 
-- (void)				startScaleChange
+- (void)startScaleChange;
 {
-	mIsChangingScale = YES;
+	_isChangingScale = YES;
 	[mRT retrigger];
 }
 
-
-
 #pragma mark -
 #pragma mark As an NSResponder
+
 ///*********************************************************************************************************************
 ///
 /// method:			scrollWheel:
@@ -695,7 +580,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 ///
 ///********************************************************************************************************************
 
-- (void)				scrollWheel:(NSEvent*) theEvent
+- (void)scrollWheel:(NSEvent *)theEvent;
 {
 	NSScrollView* scroller = [self enclosingScrollView];
 	
@@ -716,18 +601,17 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 		[super scrollWheel: theEvent];
 }
 
-
 #pragma mark -
 #pragma mark As an NSView
 
-- (id)					initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame;
 {
 	self = [super initWithFrame:frame];
 	if (self != nil)
     {
-		m_scale = 1.0;
-		mMinScale = 0.025;
-		mMaxScale = 250.0;
+		_scale = 1.0;
+		self.minimumScale = 0.025;
+		self.maximumScale = 250.0;
 		
 		mRT = [[DKRetriggerableTimer retriggerableTimerWithPeriod:kDKZoomingRetriggerPeriod target:self selector:@selector(stopScaleChange)] retain];
 	}
@@ -735,7 +619,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 }
 
 
-- (void)				dealloc
+- (void)dealloc;
 {
 	[mRT release];
 	[super dealloc];
@@ -745,7 +629,7 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 #pragma mark -
 #pragma mark As part of NSMenuValidation protocol
 
-- (BOOL)				validateMenuItem:(NSMenuItem*) item
+- (BOOL)validateMenuItem:(NSMenuItem *)item;
 {
 	SEL		action = [item action];
 	
