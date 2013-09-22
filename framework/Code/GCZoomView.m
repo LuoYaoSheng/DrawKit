@@ -623,6 +623,11 @@ NSString*	kDKDrawingScrollwheelSensePrefsKey				= @"kDKDrawingcrollwheelSense";	
 - (id)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
+    
+    if ([self respondsToSelector:@selector(setTranslatesAutoresizingMaskIntoConstraints:)]) {
+        [self setTranslatesAutoresizingMaskIntoConstraints:YES];
+    }
+    
     if (self) {
         _scale = 1.0;
         self.minimumScale = 0.025;
