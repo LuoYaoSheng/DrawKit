@@ -16,10 +16,10 @@
 
 @interface DKDrawkitInspectorBase : NSWindowController
 
-- (void)				documentDidChange:(NSNotification*) note;
-- (void)				layerDidChange:(NSNotification*) note;
-- (void)				selectedObjectDidChange:(NSNotification*) note;
-- (void)				subSelectionDidChange:(NSNotification*) note;
+- (void)documentDidChange:(NSNotification *)note;
+- (void)layerDidChange:(NSNotification *)note;
+- (void)selectedObjectDidChange:(NSNotification *)note;
+- (void)subSelectionDidChange:(NSNotification *)note;
 
 - (void)				redisplayContentForSelection:(NSArray*) selection;
 - (void)				redisplayContentForSubSelection:(NSSet*) subsel ofObject:(DKDrawableObject*) object;

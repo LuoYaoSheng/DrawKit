@@ -242,8 +242,7 @@ NSString*	kDKDrawingInfoTextLabelAttributes = @"kDKDrawingInfoTextLabelAttribute
 	}
 }
 
-
-- (NSAttributedString*)	labelForDrawingInfoItem:(NSString*) key;
+- (NSAttributedString *)labelForDrawingInfoItem:(NSString *)key;
 {
 	// returns the infobox label for the given drawing info item. The string is localisable.
 	
@@ -345,8 +344,7 @@ NSString*	kDKDrawingInfoTextLabelAttributes = @"kDKDrawingInfoTextLabelAttribute
 	return nil;
 }
 
-
-- (void)				textViewDidChangeSelection:(NSNotification*) aNotification
+- (void)textViewDidChangeSelection:(NSNotification *)aNotification;
 {
 	// the editable text changed. Get the text from the editor and set the dictionary's entry for the current key
 	

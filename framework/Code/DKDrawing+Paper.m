@@ -28,7 +28,7 @@
 ///
 ///********************************************************************************************************************
 
-+ (NSSize)				isoA0PaperSize:(BOOL) portrait
++ (NSSize)isoA0PaperSize:(BOOL)portrait;
 {
 	// A0 is defined as a sheet 1m^2 in area with sides of ratio 1:sqrt(2) which gives 841 x 1189 mm
 	
@@ -62,7 +62,7 @@
 ///
 ///********************************************************************************************************************
 
-+ (NSSize)				isoA1PaperSize:(BOOL) portrait
++ (NSSize)isoA1PaperSize:(BOOL)portrait;
 {
 	NSSize a1 = [self isoA0PaperSize:!portrait];
 	
@@ -88,7 +88,7 @@
 ///
 ///********************************************************************************************************************
 
-+ (NSSize)				isoA2PaperSize:(BOOL) portrait
++ (NSSize)isoA2PaperSize:(BOOL)portrait;
 {
 	NSSize a2 = [self isoA1PaperSize:!portrait];
 	

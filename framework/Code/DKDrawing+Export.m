@@ -131,7 +131,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				JPEGDataWithProperties:(NSDictionary*) props
+- (NSData*)JPEGDataWithProperties:(NSDictionary*) props
 {
 	NSAssert( props != nil, @"cannot create JPEG data - properties were nil");
 	
@@ -208,7 +208,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				TIFFDataWithProperties:(NSDictionary*) props
+- (NSData*)TIFFDataWithProperties:(NSDictionary*) props
 {
 	NSAssert( props != nil, @"cannot create TIFF data - properties were nil");
 	
@@ -308,7 +308,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				PNGDataWithProperties:(NSDictionary*) props
+- (NSData*)PNGDataWithProperties:(NSDictionary*) props
 {
 	NSAssert( props != nil, @"cannot create PNG data - properties were nil");
 	
@@ -380,7 +380,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				JPEGDataWithResolution:(NSInteger) dpi quality:(CGFloat) quality progressive:(BOOL) progressive
+- (NSData*)JPEGDataWithResolution:(NSInteger) dpi quality:(CGFloat) quality progressive:(BOOL) progressive
 {
 	NSDictionary* props = [NSDictionary dictionaryWithObjectsAndKeys:	[NSNumber numberWithInteger:dpi],			kDKExportPropertiesResolution,
 																		[NSNumber numberWithDouble:quality],		NSImageCompressionFactor,
@@ -406,7 +406,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				TIFFDataWithResolution:(NSInteger) dpi compressionType:(NSTIFFCompression) compType
+- (NSData*)TIFFDataWithResolution:(NSInteger) dpi compressionType:(NSTIFFCompression) compType
 {
 	NSDictionary* props = [NSDictionary dictionaryWithObjectsAndKeys:	[NSNumber numberWithInteger:dpi],			kDKExportPropertiesResolution,
 																		[NSNumber numberWithInteger:compType],		NSImageCompressionMethod,
@@ -432,7 +432,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				PNGDataWithResolution:(NSInteger) dpi gamma:(CGFloat) gumma interlaced:(BOOL) interlaced
+- (NSData *)PNGDataWithResolution:(NSInteger) dpi gamma:(CGFloat) gumma interlaced:(BOOL) interlaced
 {
 	NSDictionary* props = [NSDictionary dictionaryWithObjectsAndKeys:	[NSNumber numberWithInteger:dpi],			kDKExportPropertiesResolution,
 																		[NSNumber numberWithDouble:gumma],		NSImageGamma,
@@ -456,7 +456,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				thumbnailData
+- (NSData *)thumbnailData
 {
 	NSDictionary* props = [NSDictionary dictionaryWithObjectsAndKeys:	[NSNumber numberWithInteger:72],			kDKExportPropertiesResolution,
 						   [NSNumber numberWithDouble:0.5],		NSImageCompressionFactor,
@@ -481,7 +481,7 @@ NSString* kDKExportedImageRelativeScale = @"kDKExportedImageRelativeScale";
 ///
 ///********************************************************************************************************************
 
-- (NSArray*)			layerBitmapsWithDPI:(NSUInteger) dpi
+- (NSArray *)layerBitmapsWithDPI:(NSUInteger) dpi
 {
 	NSMutableArray* layerBitmaps = [NSMutableArray array];
 	NSEnumerator*	iter = [[self flattenedLayers] reverseObjectEnumerator];

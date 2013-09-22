@@ -81,24 +81,24 @@
 
 #pragma mark -
 #pragma mark Constants (Not Localized)
-	// Standard event types for conditional logging
-extern NSString*const kWheneverEvent; // I.e., Whenever we are logging anything
-	// Useful for logging an event that is always of interest when debugging, but not of interest when not debugging. For example, a caught exception or other failure of some kind.
-	// You will still use NSLog() to *always* log an event, regardless of whether you are debugging or not.
+// Standard event types for conditional logging
+extern NSString * const kWheneverEvent; // I.e., Whenever we are logging anything
+// Useful for logging an event that is always of interest when debugging, but not of interest when not debugging. For example, a caught exception or other failure of some kind.
+// You will still use NSLog() to *always* log an event, regardless of whether you are debugging or not.
 
-extern NSString*const kUserEvent;     // E.g., IBActions and other user input
-extern NSString*const kScriptEvent;   // E.g., Any reaction to an AppleScript event
-extern NSString*const kReactiveEvent; // E.g., Significant reactions, such as a critical method call
-extern NSString*const kUIEvent;       // E.g., Displaying a dialog or changing a tab of a NSTabView
-extern NSString*const kFileEvent;     // E.g., Any intermediate steps taken during file saving or reading.
-extern NSString*const kLifeEvent;     // I.e., Object lifetime (allocation, initialization or deallocation)
-extern NSString*const kStateEvent;    // E.g., Significant changes to object state
-extern NSString*const kInfoEvent;     // E.g., Informational logging such as an object's current state. Use sparingly.
+extern NSString * const kUserEvent;     // E.g., IBActions and other user input
+extern NSString * const kScriptEvent;   // E.g., Any reaction to an AppleScript event
+extern NSString * const kReactiveEvent; // E.g., Significant reactions, such as a critical method call
+extern NSString * const kUIEvent;       // E.g., Displaying a dialog or changing a tab of a NSTabView
+extern NSString * const kFileEvent;     // E.g., Any intermediate steps taken during file saving or reading.
+extern NSString * const kLifeEvent;     // I.e., Object lifetime (allocation, initialization or deallocation)
+extern NSString * const kStateEvent;    // E.g., Significant changes to object state
+extern NSString * const kInfoEvent;     // E.g., Informational logging such as an object's current state. Use sparingly.
 
-// new event types added by Graham Cox 
+// new event types added by Graham Cox
 
-extern NSString* const kKVOEvent;		// pertains to KVO adding or removing observers, which events lead to a very verbose log if enabled, therefore separate.
-extern NSString* const kUndoEvent;		// pertains to undo operations
+extern NSString * const kKVOEvent;		// pertains to KVO adding or removing observers, which events lead to a very verbose log if enabled, therefore separate.
+extern NSString * const kUndoEvent;		// pertains to undo operations
 
 //    Remember, you are not required to use all of the event types. They are intended
 // solely to make it easier to reduce the noise level in any given set of logged output.

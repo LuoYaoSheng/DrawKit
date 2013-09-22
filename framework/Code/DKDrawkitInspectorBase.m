@@ -20,7 +20,7 @@
 #pragma mark As a DKDrawkitInspectorBase
 
 
-- (void)				documentDidChange:(NSNotification*) note
+- (void)				documentDidChange:(NSNotification *)note
 {
 	LogEvent_(kReactiveEvent, @"document did change (%@), window = %@", [note name], [note object]);
 	
@@ -31,7 +31,7 @@
 }
 
 
-- (void)				layerDidChange:(NSNotification*) note
+- (void)				layerDidChange:(NSNotification *)note
 {
 	#pragma unused(note)
 	
@@ -41,7 +41,7 @@
 }
 
 
-- (void)				selectedObjectDidChange:(NSNotification*) note
+- (void)				selectedObjectDidChange:(NSNotification *)note
 {
 	if([[note object] respondsToSelector:@selector(selection)])
 	{
@@ -62,7 +62,7 @@
 }
 
 
-- (void)				subSelectionDidChange:(NSNotification*) note
+- (void)				subSelectionDidChange:(NSNotification *)note
 {
 	
 	DKDrawableObject* obj = (DKDrawableObject*)[note object];

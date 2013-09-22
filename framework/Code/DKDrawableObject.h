@@ -160,8 +160,8 @@
 
 - (void)				setStyle:(DKStyle*) aStyle;
 - (DKStyle*)			style;
-- (void)				styleWillChange:(NSNotification*) note;
-- (void)				styleDidChange:(NSNotification*) note;
+- (void)				styleWillChange:(NSNotification *)note;
+- (void)				styleDidChange:(NSNotification *)note;
 - (NSSet*)				allStyles;
 - (NSSet*)				allRegisteredStyles;
 - (void)				replaceMatchingStylesFromSet:(NSSet*) aSet;

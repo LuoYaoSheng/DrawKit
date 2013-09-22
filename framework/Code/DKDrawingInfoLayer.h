@@ -58,7 +58,7 @@ DKInfoBoxPlacement;
 - (NSRect)				labelRectInRect:(NSRect) itemRect forLabel:(NSAttributedString*) ls;
 
 - (NSString*)			keyForEditableRegionUnderMouse:(NSPoint) p;
-- (void)				textViewDidChangeSelection:(NSNotification*) aNotification;
+- (void)textViewDidChangeSelection:(NSNotification *)aNotification;
 
 @end
 
