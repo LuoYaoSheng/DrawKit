@@ -18,7 +18,7 @@
 @implementation NSDictionary (DeepCopy)
 
 
-- (NSDictionary*)		deepCopy
+- (NSDictionary*)deepCopy;
 {
 #if DO_IT_THE_EASY_WAY
 	return [[NSDictionary alloc] initWithDictionary:self copyItems:YES];
@@ -47,7 +47,7 @@
 #pragma mark -
 @implementation NSArray (DeepCopy)
 
-- (NSArray*)			deepCopy
+- (NSArray*)deepCopy
 {
 #if DO_IT_THE_EASY_WAY
 	return [[NSArray alloc] initWithArray:self copyItems:YES];
@@ -76,7 +76,7 @@
 #pragma mark -
 @implementation NSObject (DeepCopy)
 
-- (id)					deepCopy
+- (id)deepCopy;
 {
 	return [self copy];
 }

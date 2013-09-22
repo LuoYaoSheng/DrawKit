@@ -422,7 +422,7 @@ static NSSize			sKnobSize = { 6.0, 6.0 };
 }
 
 
-- (void)			setControlKnobSizeForViewScale:(CGFloat) scale
+- (void)setControlKnobSizeForViewScale:(CGFloat)scale;
 {
 	// given a scale of a view where 1.0 = 100%, this calculates the appropriate control knob size to use. Note that control knobs are not
 	// set to a fixed size, but do scale a little. This gives a better feel when zooming the view than a straight compensation.

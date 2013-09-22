@@ -97,7 +97,7 @@ enum
 - (void)					removeAllStyles;
 
 - (void)					setNeedsUIUpdate;
-- (void)					styleDidChange:(NSNotification*) note;
+- (void)					styleDidChange:(NSNotification *)note;
 
 - (NSMenu*)					managedStylesMenuWithItemTarget:(id) target itemAction:(SEL) selector;
 

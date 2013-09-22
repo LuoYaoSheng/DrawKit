@@ -31,6 +31,7 @@
 
 
 #pragma mark -
+
 - (id)	initWithContentRect:(NSRect) contentRect
 		styleMask:(NSUInteger) styleMask
 		backing:(NSBackingStoreType) bufferingType

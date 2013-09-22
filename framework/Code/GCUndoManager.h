@@ -118,7 +118,7 @@ GCUndoTaskCoalescingKind;
 
 // private NSUndoManager API for compatibility
 
-- (void)				_processEndOfEventNotification:(NSNotification*) note;
+- (void)				_processEndOfEventNotification:(NSNotification *)note;
 
 // additional API
 // automatic empty group discarding (default = YES)

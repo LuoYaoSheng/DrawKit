@@ -41,7 +41,7 @@ static NSString*	sDefault_string = @"Double-click to edit this text";
 - (void)			changeKeyPath:(NSString*) keypath ofObject:(id) object toValue:(id) value;
 - (DKTextPath*)		makeTextPathObject;
 - (void)			mutateStyle;
-- (void)			textWillChange:(NSNotification*) note;
+- (void)			textWillChange:(NSNotification *)note;
 
 @end
 
@@ -1910,7 +1910,7 @@ static NSString*	sDefault_string = @"Double-click to edit this text";
 ///
 ///********************************************************************************************************************
 
-- (void)			styleDidChange:(NSNotification*) note
+- (void)			styleDidChange:(NSNotification *)note
 {
 	if([[self style] hasTextAttributes])
 	{
@@ -2127,7 +2127,7 @@ static NSString*	sDefault_string = @"Double-click to edit this text";
 }
 
 
-- (void)					textWillChange:(NSNotification*) note
+- (void)					textWillChange:(NSNotification *)note
 {
 #pragma unused(note)
 }

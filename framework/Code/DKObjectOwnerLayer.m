@@ -378,7 +378,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 ///
 ///********************************************************************************************************************
 
-- (NSArray*)			objectsReturning:(NSInteger) answer toSelector:(SEL) selector
+- (NSArray*)objectsReturning:(NSInteger)answer toSelector:(SEL)selector;
 {
 	NSEnumerator*	iter = [[self objects] objectEnumerator];
 	NSMutableArray*	result = [NSMutableArray array];
@@ -2949,7 +2949,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 ///
 ///********************************************************************************************************************
 
-- (void)				layerDidBecomeActiveLayer
+- (void)layerDidBecomeActiveLayer
 {
 	[self invalidateCache];
 
@@ -2972,7 +2972,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 ///
 ///********************************************************************************************************************
 
-- (void)				layerDidResignActiveLayer
+- (void)layerDidResignActiveLayer
 {
 	if(([self layerCacheOption] & kDKLayerCacheObjectOutlines) != 0 )
 		[self setNeedsDisplay:YES];
@@ -2981,7 +2981,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 
 #pragma mark -
 #pragma mark As an NSObject
-- (void)				dealloc
+- (void)dealloc
 {
 	// though we are about to release all the objects, set their container to nil - this ensures that
 	// if anything else is retaining them, when they are later released they won't have stale refs to the drawing, owner, et. al.
@@ -2993,7 +2993,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 }
 
 
-- (id)				init
+- (id)init;
 {
 	self = [super init];
 	if (self != nil)
@@ -3012,7 +3012,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 }
 
 
-- (NSString*)		description
+- (NSString*)description;
 {
 	return [NSString stringWithFormat:@"%@,\nstorage = %@", [super description], [self storage]];
 }
@@ -3036,17 +3036,17 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 ///
 ///********************************************************************************************************************
 
-- (DKObjectOwnerLayer*)	layer
+- (DKObjectOwnerLayer*)layer
 {
 	return self;
 }
 
-- (DKImageDataManager*)	imageManager
+- (DKImageDataManager*)imageManager
 {
 	return [[self drawing] imageManager];
 }
 
-- (id)					metadataObjectForKey:(NSString*) key
+- (id)metadataObjectForKey:(NSString*)key
 {
 	return [super metadataObjectForKey:key];
 }
@@ -3054,7 +3054,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 
 #pragma mark -
 #pragma mark As part of NSCoding Protocol
-- (void)				encodeWithCoder:(NSCoder*) coder
+- (void)encodeWithCoder:(NSCoder*)coder
 {
 	NSAssert(coder != nil, @"Expected valid coder");
 	[super encodeWithCoder:coder];
@@ -3069,7 +3069,7 @@ static DKLayerCacheOption sDefaultCacheOption = kDKLayerCacheNone;
 }
 
 
-- (id)					initWithCoder:(NSCoder*) coder
+- (id)initWithCoder:(NSCoder*)coder
 {
 	NSAssert(coder != nil, @"Expected valid coder");
 	LogEvent_(kFileEvent, @"decoding object owner layer %@", self);

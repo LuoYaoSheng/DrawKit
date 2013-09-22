@@ -39,7 +39,7 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (id)					initWithView:(NSView*) aView
+- (id)initWithView:(NSView *)aView;
 {
 	NSAssert( aView != nil, @"can't initialize a controller for nil view");
 	
@@ -53,9 +53,6 @@ static NSTimer* s_autoscrollTimer = nil;
 	
 	return self;
 }
-
-
-
 
 #pragma mark -
 #pragma mark -  fundamental objects in the controller's world
@@ -73,12 +70,10 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSView*)				view
+- (NSView *)view;
 {
 	return mViewRef;
 }
-
-
 
 ///*********************************************************************************************************************
 ///
@@ -93,13 +88,10 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (DKDrawing*)			drawing
+- (DKDrawing *)drawing;
 {
 	return mDrawingRef;
 }
-
-
-
 
 #pragma mark -
 #pragma mark -  updating the view from the drawing (refresh)
@@ -118,11 +110,10 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setViewNeedsDisplay:(NSNumber*) updateBoolValue
+- (void)setViewNeedsDisplay:(NSNumber *)updateBoolValue;
 {
 	[[self view] setNeedsDisplay:[updateBoolValue boolValue]];
 }
-
 
 ///*********************************************************************************************************************
 ///
@@ -138,12 +129,10 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setViewNeedsDisplayInRect:(NSValue*) updateRectValue
+- (void)setViewNeedsDisplayInRect:(NSValue *)updateRectValue;
 {
 	[[self view] setNeedsDisplayInRect:[updateRectValue rectValue]];
 }
-
-
 
 ///*********************************************************************************************************************
 ///
@@ -158,7 +147,7 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				drawingDidChangeToSize:(NSValue*) drawingSizeValue
+- (void)drawingDidChangeToSize:(NSValue *)drawingSizeValue;
 {
 	// adjust the bounds to the size given, and the frame too, allowing for the current scale.
 	
@@ -1231,7 +1220,7 @@ static NSTimer* s_autoscrollTimer = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setDrawing:(DKDrawing*) aDrawing
+- (void)setDrawing:(DKDrawing *)aDrawing;
 {
 	if( aDrawing != mDrawingRef )
 	{

@@ -1196,7 +1196,7 @@ static BOOL				s_NoDKDefaults = NO;
 }
 
 
-- (void)					styleDidChange:(NSNotification*) note
+- (void)					styleDidChange:(NSNotification *)note
 {
 	// when any style changes, this is notified. If the style is in the registry, use its key to update any managed menus directly.
 	// doing this is significantly more efficient than just rebuilding the entire menu, as only the individual menu items affected

@@ -251,7 +251,7 @@ static DKDrawingTool*		sGlobalTool = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setDrawingTool:(DKDrawingTool*) aTool
+- (void)setDrawingTool:(DKDrawingTool *)aTool;
 {
 	NSAssert( aTool != nil, @"attempt to set a nil tool");
 	
@@ -676,7 +676,7 @@ static DKDrawingTool*		sGlobalTool = nil;
 ///
 ///********************************************************************************************************************
 
-- (id)					initWithView:(NSView*) aView
+- (id)initWithView:(NSView *)aView;
 {
 	self = [super initWithView:aView];
 	if( self != nil )
@@ -706,7 +706,7 @@ static DKDrawingTool*		sGlobalTool = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setDrawing:(DKDrawing*) aDrawing
+- (void)setDrawing:(DKDrawing *)aDrawing;
 {
 	[super setDrawing:aDrawing];
 	
@@ -1173,7 +1173,7 @@ static DKDrawingTool*		sGlobalTool = nil;
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				validateMenuItem:(NSMenuItem*) item
+- (BOOL)validateMenuItem:(NSMenuItem *)item
 {
 	if([item action] == @selector(toggleAutoRevertAction:))
 	{

@@ -505,7 +505,7 @@
 
 
 /*
-- (NSData*)				pdfDataOfObjects
+- (NSData*)pdfDataOfObjects
 {
 	NSData* pdfData = nil;
 	

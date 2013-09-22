@@ -27,7 +27,7 @@
 ///
 ///********************************************************************************************************************
 
-NSLayoutManager*		sharedDrawingLayoutManager( void )
+NSLayoutManager * sharedDrawingLayoutManager( void )
 {
     // This method returns an NSLayoutManager that can be used to draw the contents of a DKTextShape.
 	// The same layout manager is used for all instances of the class
@@ -73,7 +73,7 @@ NSLayoutManager*		sharedDrawingLayoutManager( void )
 ///
 ///********************************************************************************************************************
 
-NSLayoutManager*		sharedCaptureLayoutManager( void )
+NSLayoutManager * sharedCaptureLayoutManager( void )
 {
     static DKBezierLayoutManager*	sharedLM = nil;
 	NSTextContainer*				tc = nil;
@@ -104,8 +104,6 @@ NSLayoutManager*		sharedCaptureLayoutManager( void )
 
 @implementation NSAttributedString (DKAdditions)
 
-
-
 ///*********************************************************************************************************************
 ///
 /// method:			drawInRect:withLayoutSize:atAngle:
@@ -124,7 +122,7 @@ NSLayoutManager*		sharedCaptureLayoutManager( void )
 ///
 ///********************************************************************************************************************
 
-- (void)	drawInRect:(NSRect) destRect withLayoutSize:(NSSize) layoutSize atAngle:(CGFloat) radians
+- (void)drawInRect:(NSRect)destRect withLayoutSize:(NSSize)layoutSize atAngle:(CGFloat)radians
 {
 	[self drawInRect:destRect withLayoutPath:[NSBezierPath bezierPathWithRect:NSMakeRect( 0, 0, layoutSize.width, layoutSize.height)] atAngle:radians];
 }

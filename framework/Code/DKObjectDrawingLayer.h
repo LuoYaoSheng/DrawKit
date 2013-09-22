@@ -138,7 +138,7 @@
 - (void)				setDragExclusionRect:(NSRect) aRect;
 - (NSRect)				dragExclusionRect;
 - (void)				beginDragOfSelectedObjectsWithEvent:(NSEvent*) event inView:(NSView*) view;
-- (void)				drawingSizeChanged:(NSNotification*) note;
+- (void)				drawingSizeChanged:(NSNotification *)note;
 
 // grouping & ungrouping operations:
 

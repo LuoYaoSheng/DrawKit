@@ -74,7 +74,7 @@ enum
 }
 
 
-+ (void)				setDefaultSelectionChangesAreUndoable:(BOOL) undoSel
++ (void)setDefaultSelectionChangesAreUndoable:(BOOL)undoSel
 {
 	[[NSUserDefaults standardUserDefaults] setBool:undoSel forKey:@"DKDrawingLayer_undoableSelectionDefault"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -2009,7 +2009,7 @@ enum
 }
 
 
-- (void)				drawingSizeChanged:(NSNotification*) note
+- (void)				drawingSizeChanged:(NSNotification *)note
 {
 	#pragma unused(note)
 	

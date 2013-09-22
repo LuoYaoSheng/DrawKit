@@ -652,7 +652,7 @@ NSString*	kDKTracingParam_opttolerance	= @"kDKTracingParam_opttolerance";
 
 #pragma mark -
 #pragma mark As an NSObject
-- (void)				dealloc
+- (void)dealloc
 {
 	[mColour release];
 	[mVectorData release];

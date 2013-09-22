@@ -42,7 +42,7 @@
 - (CGFloat)					verticalTextOffsetForTextSize:(NSSize) textSize objectSize:(NSSize) osize;
 - (void)					applyNonCocoaTextAttributes:(NSDictionary*) attrs;
 - (NSLayoutManager*)		layoutManager;
-- (void)					masterStringChanged:(NSNotification*) note;
+- (void)					masterStringChanged:(NSNotification *)note;
 
 @end
 
@@ -1064,7 +1064,7 @@ static CGFloat s_maximumVerticalOffset = DEFAULT_BASELINE_OFFSET_MAX;
 }
 
 
-- (void)					masterStringChanged:(NSNotification*) note
+- (void)					masterStringChanged:(NSNotification *)note
 {
 	// invalidates the cache whenever the substitutor notifies a change to the string content or attributes
 

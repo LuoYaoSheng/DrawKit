@@ -70,7 +70,7 @@ static DKToolRegistry*	s_toolRegistry = nil;
 ///
 ///********************************************************************************************************************
 
-+ (DKToolRegistry*)		sharedToolRegistry
++ (DKToolRegistry *)sharedToolRegistry;
 {
 	if( s_toolRegistry == nil )
 	{
@@ -96,7 +96,7 @@ static DKToolRegistry*	s_toolRegistry = nil;
 ///
 ///********************************************************************************************************************
 
-- (DKDrawingTool*)		drawingToolWithName:(NSString*) name
+- (DKDrawingTool *)drawingToolWithName:(NSString *)name
 {
 	NSAssert( name != nil, @"cannot find a tool with a nil name");
 	

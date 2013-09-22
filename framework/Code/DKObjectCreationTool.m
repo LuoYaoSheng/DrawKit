@@ -52,7 +52,7 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-+ (void)				registerDrawingToolForObject:(id <NSCopying>) shape withName:(NSString*) name
++ (void)registerDrawingToolForObject:(id <NSCopying>)shape withName:(NSString*)name
 {
 	// creates a drawing tool for the given object and registers it with the name. This quickly allows you to make a tool
 	// for any object you already have, give it a name and use it to make more similar objects in the drawing.
@@ -283,7 +283,7 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSImage*)			image
+- (NSImage*)image
 {
 	return [[self prototype] swatchImageWithSize:kDKDefaultToolSwatchSize];
 }
@@ -303,7 +303,7 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				finishCreation:(DKToolController*) controller
+- (BOOL)finishCreation:(DKToolController*)controller
 {
 	BOOL result = NO;
 	
@@ -389,7 +389,7 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				dealloc
+- (void)dealloc;
 {
 	[m_prototypeObject release];
 	[super dealloc];
@@ -488,16 +488,12 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				toolControllerWillUnsetTool:(DKToolController*) aController
+- (void)toolControllerWillUnsetTool:(DKToolController*) aController
 {
 	//NSLog(@"unsetting %@, proto = %@", self, m_protoObject);
 	
 	[self finishCreation:aController];
 }
-
-
-
-
 
 #pragma mark -
 #pragma mark - As part of DKDrawingTool Protocol
@@ -726,7 +722,7 @@ static DKStyle*	sCreatedObjectsStyle = nil;
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				mouseUpAtPoint:(NSPoint) p partCode:(NSInteger) pc layer:(DKLayer*) layer event:(NSEvent*) event delegate:(id) aDel
+- (BOOL)mouseUpAtPoint:(NSPoint)p partCode:(NSInteger)pc layer:(DKLayer*)layer event:(NSEvent*)event delegate:(id)aDel
 {
 #pragma unused(pc)
 	NSAssert( layer != nil, @"layer was nil in creation tool mouse up");
