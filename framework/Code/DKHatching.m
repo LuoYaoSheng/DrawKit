@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKHatching.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 06/10/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKHatching.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 06/10/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKHatching.h"
 #import "DKDrawKitMacros.h"
@@ -100,7 +102,7 @@
 
 + (DKHatching*)		hatchingWithDotPitch:(CGFloat) pitch diameter:(CGFloat) diameter
 {
-	DKHatching* hatch = [self hatchingWithLineWidth:diameter spacing:pitch angle:pi * 0.25];
+	DKHatching* hatch = [self hatchingWithLineWidth:diameter spacing:pitch angle:M_PI_4];
 	
 	CGFloat		dashPattern[2];
 	
@@ -652,7 +654,7 @@
 		
 		[self setLeadIn:0.0];
 		[self setSpacing:8.0];
-		[self setAngle:pi/4.0]; //45 degrees
+		[self setAngle:M_PI_4]; //45 degrees
 		[self setWidth:0.25];
 		
 		[self setLineCapStyle:NSButtLineCapStyle];

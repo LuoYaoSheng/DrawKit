@@ -1,12 +1,15 @@
-///**********************************************************************************************************************************
-///  NSBezierPath-Geometry.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 22/10/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  NSBezierPath-Geometry.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 22/10/2006.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "NSBezierPath+Geometry.h"
 #import "DKDrawKitMacros.h"
@@ -195,7 +198,7 @@ static BOOL				CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPat
 	// resultis in radians. Can be used to determine the necessary bounding rect of the path for a given stroke width and miter limit. For curve
 	// elements, the curvature is ignored and the element treated as a line segment.
 	
-	CGFloat				v, a = pi;
+	CGFloat				v, a = M_PI;
 	NSInteger					i, m = [self elementCount] - 1;
 	NSBezierPathElement	element, nextElement;
 	NSPoint				fp, cp, pp, xp, ap[3], np[3];
@@ -400,7 +403,7 @@ static BOOL				CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPat
 				}
 			}
 			
-			slope = atan2f( p1.y - p0.y, p1.x - p0.x ) + ( pi * 0.5 );
+			slope = atan2f( p1.y - p0.y, p1.x - p0.x ) + ( M_PI_2 );
 			
 			// calculate the position of the modified point
 			
@@ -501,11 +504,11 @@ static BOOL		CornerArc( const NSPoint* pointsIn, CGFloat offset, NSBezierPath* n
 	
 	ra = s2 - s1;
 	
-	if( ra > pi )
-		ra = pi - ra;
+	if( ra > M_PI )
+		ra = M_PI - ra;
 	
-	if( ra < -pi )
-		ra = -pi - ra;
+	if( ra < -M_PI )
+		ra = -M_PI - ra;
 	
 	//NSLog(@"ra = %f, offset = %f", ra, offset );
 	
@@ -538,11 +541,11 @@ static BOOL		CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPath*
 	
 	ra = s2 - s1;
 	
-	if( ra > pi )
-		ra = pi - ra;
+	if( ra > M_PI )
+		ra = M_PI - ra;
 	
-	if( ra < -pi )
-		ra = -pi - ra;
+	if( ra < -M_PI )
+		ra = -M_PI - ra;
 	
 	//NSLog(@"ra = %f, offset = %f", ra, offset );
 	
@@ -633,7 +636,7 @@ static BOOL		CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPath*
 					
 					// ok, we have enough to work out the slope and start the new path
 					
-					slope = Slope( v[0], v[1] ) + pi * 0.5f;
+					slope = Slope( v[0], v[1] ) + M_PI_2;
 					op.x = v[0].x + delta * cosf( slope );
 					op.y = v[0].y + delta * sinf( slope );
 					[newPath moveToPoint:op];
@@ -731,7 +734,7 @@ static BOOL		CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPath*
 	{
 		// open-ended path, place last offset point
 		
-		slope = Slope( v[0], v[1] ) + pi * 0.5f;
+		slope = Slope( v[0], v[1] ) + M_PI_2;
 		op.x = v[1].x + delta * cosf( slope );
 		op.y = v[1].y + delta * sinf( slope );
 		[newPath lineToPoint:op];
@@ -803,7 +806,7 @@ static BOOL		CornerBevel( const NSPoint* pointsIn, CGFloat offset, NSBezierPath*
 				}
 			}
 			
-			slope = atan2f( p1.y - p0.y, p1.x - p0.x ) + ( pi * 0.5 );
+			slope = atan2f( p1.y - p0.y, p1.x - p0.x ) + M_PI_2;
 			
 			// calculate the position of the modified point
 			
@@ -1286,9 +1289,9 @@ static void				InterpolatePoints( const NSPoint* v, NSPoint* cp1, NSPoint* cp2, 
 		// calculate position of corner offset from the path
 		
 		if ( side )
-			slope += ( pi / 2.0 );
+			slope += M_PI_2;
 		else
-			slope -= ( pi / 2.0 );
+			slope -= M_PI_2;
 	
 		side = !side;
 		
@@ -1377,9 +1380,9 @@ static void				InterpolatePoints( const NSPoint* v, NSPoint* cp1, NSPoint* cp2, 
 			CGFloat slp = slope;
 			
 			if ( side )
-				slp += ( pi / 2.0 );
+				slp += M_PI_2;
 			else
-				slp -= ( pi / 2.0 );
+				slp -= M_PI_2;
 		
 			side = !side;
 			
@@ -1393,8 +1396,8 @@ static void				InterpolatePoints( const NSPoint* v, NSPoint* cp1, NSPoint* cp2, 
 			cp1.y += sinf( lastSlope ) * rad;
 			
 			cp2 = np;
-			cp2.x += cosf( slope - pi ) * rad;
-			cp2.y += sinf( slope - pi ) * rad;
+			cp2.x += cosf( slope - M_PI ) * rad;
+			cp2.y += sinf( slope - M_PI ) * rad;
 			
 			if ( doneFirst )
 				[newPath curveToPoint:np controlPoint1:cp1 controlPoint2:cp2];

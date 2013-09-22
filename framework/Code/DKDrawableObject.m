@@ -1774,7 +1774,7 @@ static NSDictionary*	s_interconversionTable = nil;
 
 static NSRect s_oldBounds;
 
-- (void)			styleWillChange:(NSNotification*) note
+- (void)styleWillChange:(NSNotification *)note;
 {
 	if([note object] == [self style])
 	{
@@ -1798,7 +1798,7 @@ static NSRect s_oldBounds;
 ///
 ///********************************************************************************************************************
 
-- (void)			styleDidChange:(NSNotification*) note
+- (void)styleDidChange:(NSNotification *)note;
 {
 	if([note object] == [self style])
 	{
@@ -3674,10 +3674,10 @@ static NSRect s_oldBounds;
 }
 
 
-- (NSString*)		description
+- (NSString *)description;
 {
-#warning 64BIT: Check formatting arguments
-	return [NSString stringWithFormat:@"%@ size: %@, loc: %@, angle: %.4f, offset: %@, locked: %@, style: %@, container: %x, storage: %@, user info:%@",
+//#warning 64BIT: Check formatting arguments
+	return [NSString stringWithFormat:@"%@ size: %@, loc: %@, angle: %.4f, offset: %@, locked: %@, style: %@, container: %@, storage: %@, user info:%@",
 				[super description],
 				NSStringFromSize([self size]),
 				NSStringFromPoint([self location]),
@@ -3785,7 +3785,8 @@ static NSRect s_oldBounds;
 
 #pragma mark -
 #pragma mark As part of NSMenuValidation Protocol
-- (BOOL)			validateMenuItem:(NSMenuItem*) item
+
+- (BOOL)validateMenuItem:(NSMenuItem *)item;
 {
 	SEL	action = [item action];
 	
@@ -3802,7 +3803,7 @@ static NSRect s_oldBounds;
 				NSString* name = [theStyle name];
 				
 				if( name && [name length] > 0 )
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 					itemTitle = [NSString stringWithFormat:NSLocalizedString(@"Paste Style '%@'", nil ), name];
 				
 				// don't bother pasting the same style we already have
@@ -3826,7 +3827,7 @@ static NSRect s_oldBounds;
 		{
 			NSString* name = [theStyle name];
 			if( name && [name length] > 0 )
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 				itemTitle = [NSString stringWithFormat:NSLocalizedString(@"Copy Style '%@'", nil), name];
 		}
 		[item setTitle:itemTitle];

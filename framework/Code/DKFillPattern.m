@@ -1,10 +1,13 @@
 //
 //  DKFillPattern.m
-///  DrawKit ©2005-2008 Apptree.net
+//  DrawKit ©2005-2008 Apptree.net
 //
 //  Created by Graham Cox on 26/09/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 //
 
 #import "DKFillPattern.h"
@@ -187,7 +190,7 @@
 					ra = [[mMotifAngleRandCache objectAtIndex:mPlacementCount] doubleValue];
 				else
 				{
-					ra = [DKRandom randomPositiveOrNegativeNumber] * 2.0 * pi * [self motifAngleRandomness];
+					ra = [DKRandom randomPositiveOrNegativeNumber] * 2.0 * M_PI * [self motifAngleRandomness];
 					[mMotifAngleRandCache addObject:[NSNumber numberWithDouble:ra]];
 				}
 				tempAngle = mangle;

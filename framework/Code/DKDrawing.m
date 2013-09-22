@@ -122,8 +122,6 @@ static id	sDearchivingHelper = nil;
 	return @"beta";
 }
 
-
-
 ///*********************************************************************************************************************
 ///
 /// method:			drawkitVersionString
@@ -137,7 +135,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-+ (NSString*)				drawkitVersionString
++ (NSString *)drawkitVersionString;
 {
 	NSUInteger		v = [self drawkitVersion];
 	unsigned char	s = 0;
@@ -149,14 +147,11 @@ static id	sDearchivingHelper = nil;
 	else if([status isEqualToString:@"alpha"])
 		s = 'a';
 	
-//#warning 64BIT: Inspect use of long
 	return [NSString stringWithFormat:@"%ld.%ld.%c%ld", (long)(v & 0xFF00) >> 8, (long)(v & 0xF0) >> 4, s, (long)( v & 0x0F )];
 }
 
-
-
-
 #pragma mark -
+
 //! Constructs the default drawing system for a view when the system isn't prebuilt "by hand".
 
 //! As a convenience for users of this system, if you set up a DKDrawingView in IB, and do nothing else,
@@ -181,7 +176,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-+ (DKDrawing*)				defaultDrawingWithSize:(NSSize) aSize
++ (DKDrawing *)defaultDrawingWithSize:(NSSize)aSize;
 {
 	// for when a view builds the back-end automatically, this supplies a default drawing complete with a grid layer, an object drawing
 	// layer, and the view attached. The drawing size is set to the current view bounds size.
@@ -526,7 +521,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (id)					initWithSize:(NSSize) size
+- (id)initWithSize:(NSSize)size;
 {
 	self = [super init];
 	if (self != nil)
@@ -1176,7 +1171,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				addController:(DKViewController*) aController
+- (void)addController:(DKViewController *)aController;
 {
 	NSAssert( aController != nil, @"cannot add a nil controller to drawing");
 	
@@ -2201,7 +2196,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (DKGridLayer*)	gridLayer
+- (DKGridLayer *)gridLayer;
 {
 	NSArray* gridLayers = [self layersOfClass:[DKGridLayer class] performDeepSearch:YES];
 	
@@ -2421,7 +2416,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)			finalizePriorToSaving
+- (void)finalizePriorToSaving
 {
 	[[self undoManager] disableUndoRegistration];
 	
@@ -2467,7 +2462,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (BOOL)				writeToFile:(NSString*) filename atomically:(BOOL) atom
+- (BOOL)writeToFile:(NSString*)filename atomically:(BOOL)atom
 {
 	NSAssert( filename != nil, @"filename was nil");
 	NSAssert([filename length] > 0, @"filename was empty");
@@ -2491,7 +2486,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				drawingAsXMLDataAtRoot
+- (NSData *)drawingAsXMLDataAtRoot
 {
 	return [self drawingAsXMLDataForKey:@"root"];
 }
@@ -2510,7 +2505,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSData*)				drawingAsXMLDataForKey:(NSString*) key
+- (NSData *)drawingAsXMLDataForKey:(NSString*) key
 {
 	NSAssert( key != nil, @"key cannot be nil");
 	NSAssert( [key length] > 0, @"key cannot be empty");
@@ -2692,7 +2687,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (NSString*)				uniqueLayerNameForName:(NSString*) aName
+- (NSString*)uniqueLayerNameForName:(NSString*) aName
 {
 	NSArray*	existingNames = [[self flattenedLayersIncludingGroups:YES] valueForKey:@"layerName"];
 	NSInteger	numeral = 0;
@@ -2752,7 +2747,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				drawRect:(NSRect) rect inView:(DKDrawingView*) aView
+- (void)drawRect:(NSRect)rect inView:(DKDrawingView*)aView
 {
 	// save the graphics context on entry so that we can restore it when we return. This allows recovery from an exception
 	// that could leave the context stack unbalanced.
@@ -2846,7 +2841,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				setNeedsDisplayInRect:(NSRect) rect
+- (void)setNeedsDisplayInRect:(NSRect) rect
 {
 	[[self controllers] makeObjectsPerformSelector:@selector(setViewNeedsDisplayInRect:) withObject:[NSValue valueWithRect:rect]];
 }
@@ -2865,7 +2860,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)			setNeedsDisplayInRects:(NSSet*) setOfRects
+- (void)setNeedsDisplayInRects:(NSSet*) setOfRects
 {
 	NSAssert( setOfRects != nil, @"update set was nil");
 	
@@ -2891,7 +2886,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)			setNeedsDisplayInRects:(NSSet*) setOfRects withExtraPadding:(NSSize) padding
+- (void)setNeedsDisplayInRects:(NSSet*) setOfRects withExtraPadding:(NSSize) padding
 {
 	NSAssert( setOfRects != nil, @"update set was nil");
 	
@@ -2990,7 +2985,7 @@ static id	sDearchivingHelper = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)				hideRulerMarkers
+- (void)hideRulerMarkers;
 {
 	[[self controllers] makeObjectsPerformSelector:@selector(hideViewRulerMarkers)];
 }
@@ -3030,13 +3025,13 @@ static id	sDearchivingHelper = nil;
 }
 
 
-- (id)					init
+- (id)init;
 {
 	return [self initWithSize:[DKDrawing isoA2PaperSize:NO]];
 }
 
 
-- (id)					copyWithZone:(NSZone*) zone
+- (id)copyWithZone:(NSZone *)zone
 {
 	// drawings are not copyable but are sometimes used a dict key, so they need to respond to the copying protocol
 	#pragma unused(zone)

@@ -257,13 +257,13 @@ NSString*		DKMultipleMetadataItemsPBoardType = @"com.apptree.dk.multimeta";
 		
 		const char* eType = [value objCType];
 		
-#warning 64BIT: Inspect use of @encode
+//#warning 64BIT: Inspect use of @encode
 		if( strcmp( eType, @encode(NSInteger)) == 0)
 			return [self metadataItemWithInteger:[value integerValue]];
-#warning 64BIT: Inspect use of @encode
+//#warning 64BIT: Inspect use of @encode
 		else if( strcmp( eType, @encode(double)) == 0 || strcmp( eType, @encode(CGFloat)) == 0 )
 			return [self metadataItemWithReal:[value doubleValue]];
-#warning 64BIT: Inspect use of @encode
+//#warning 64BIT: Inspect use of @encode
 		else if( strcmp( eType, @encode(NSUInteger)) == 0 )
 			return [self metadataItemWithUnsigned:[value unsignedIntegerValue]];
 		else if( strcmp( eType, @encode(BOOL)) == 0 )
@@ -1056,7 +1056,7 @@ NSString*		DKMultipleMetadataItemsPBoardType = @"com.apptree.dk.multimeta";
 			}
 			
 		default:
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 			NSLog(@"an unknown type (%d) was passed to DKMetadataItem <%@> for conversion, value = %@", type, self, inValue);
 			break;
 	}

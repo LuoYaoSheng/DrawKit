@@ -3,8 +3,11 @@
 ///  DrawKit ©2005-2008 Apptree.net
 //
 //  Created by Graham Cox on 20/08/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
+//
+//  This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 //
 
 #import "DKShapeFactory.h"
@@ -122,7 +125,7 @@ NSString*	kDKSpeechBalloonCornerRadius = @"kDKSpeechBalloonCornerRadius";
 	
 	for( i = 0; i < numberOfSides; i++ )
 	{
-		angle = (( 2 * pi * i ) / numberOfSides );
+		angle = (( 2 * M_PI * i ) / numberOfSides );
 		
 		p.x = radius * cosf( angle );
 		p.y = radius * sinf( angle );
@@ -213,7 +216,7 @@ NSString*	kDKSpeechBalloonCornerRadius = @"kDKSpeechBalloonCornerRadius";
 	
 	for( i = 0; i < ( numberOfPoints * 2 ); i++ )
 	{
-		angle = (( pi * i ) / numberOfPoints );
+		angle = (( M_PI * i ) / numberOfPoints );
 		
 		if (( i % 2 ) == 0 )
 		{

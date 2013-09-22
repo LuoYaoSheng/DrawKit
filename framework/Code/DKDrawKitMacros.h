@@ -1,12 +1,14 @@
-/*
- *  DKDrawKitMacros.h
-///  DrawKit ©2005-2008 Apptree.net
- *
- *  Created by Graham Cox on 25/02/2008.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
- *
- */
+//
+//  DKDrawKitMacros.h
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 25/02/2008.
+//
+//  This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+ //
+ //  Updated and refactored by Stephan Zehrer
+ //  Copyright (c) 2013 zehrer.net. All rights reserved.
+ //
 
 //#import <Cocoa/Cocoa.h>
 #include <tgmath.h>
@@ -23,9 +25,9 @@
 // some useful angular constants
 
 #define FIFTEEN_DEGREES					(0.261799387799)
-#define NINETY_DEGREES					(pi * 0.5)
-#define FORTYFIVE_DEGREES				(pi * 0.25)
-#define HALF_PI							(pi * 0.5)
+#define NINETY_DEGREES					M_PI_2
+#define FORTYFIVE_DEGREES				M_PI_4
+#define HALF_PI							M_PI_2
 
 // exception safe save/restore of the current graphics context
 

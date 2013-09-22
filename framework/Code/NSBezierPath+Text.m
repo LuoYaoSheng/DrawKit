@@ -903,7 +903,7 @@ static NSDictionary*	s_TOPTextAttributes = nil;
 	
 	// see if we can reuse a previously cached path here
 	
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 	NSString* pathKey = [NSString stringWithFormat:@"DKStrikethroughPath_%@_%.2f", NSStringFromRange( range ), dy];
 	ulp = [cache objectForKey:pathKey];
 	

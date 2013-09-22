@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKGradient.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 2/03/05.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKGradient.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 2/03/05.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKGradient.h"
 
@@ -995,7 +997,7 @@ static NSInteger cmpColorStops (DKColorStop* lh, DKColorStop* rh, void *context)
 ///
 ///********************************************************************************************************************
 
-- (CGFloat)				angle
+- (CGFloat)angle
 {
 	return m_gradAngle;
 }
@@ -1014,9 +1016,9 @@ static NSInteger cmpColorStops (DKColorStop* lh, DKColorStop* rh, void *context)
 ///
 ///********************************************************************************************************************
 
-- (void)				setAngleInDegrees:(CGFloat) degrees
+- (void)setAngleInDegrees:(CGFloat) degrees
 {
-	[self setAngle:(degrees * pi)/180.0f];
+	[self setAngle:(degrees * M_PI)/180.0f];
 }
 
 
@@ -1034,13 +1036,13 @@ static NSInteger cmpColorStops (DKColorStop* lh, DKColorStop* rh, void *context)
 ///
 ///********************************************************************************************************************
 
-- (CGFloat)				angleInDegrees
+- (CGFloat)angleInDegrees
 {
-	return fmod(([self angle] * 180.0f )/ pi, 360.0 );
+	return fmod(([self angle] * 180.0f )/ M_PI, 360.0 );
 }
 
 
-- (void)				setAngleWithoutNotifying:(CGFloat) ang
+- (void)setAngleWithoutNotifying:(CGFloat) ang
 {
 	m_gradAngle = ang;
 }
@@ -1807,7 +1809,7 @@ static CGFunctionRef makeShaderFunction( DKGradient* object )
 }
 
 
-static inline double		powerMap( double x, double y )
+static inline double powerMap( double x, double y )
 {
 	if ( y == 0.0 )
 		y = 1.0;
@@ -1819,12 +1821,12 @@ static inline double		powerMap( double x, double y )
 }
 
 
-static inline double		sineMap( double x, double y )
+static inline double sineMap( double x, double y )
 {
 	if ( y < 0 )
-		return sin( x * pi / 2.0 + 3.0 * pi / 2.0 ) + 1.0;
+		return sin( x * M_PI_2 + 3.0 * M_PI_2 ) + 1.0;
 	else
-		return sin( x * pi / 2.0 );
+		return sin( x * M_PI_2 );
 }
 
 

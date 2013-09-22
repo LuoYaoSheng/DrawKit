@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKSweptAngleGradient.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 13/07/2007.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKSweptAngleGradient.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 13/07/2007.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKSweptAngleGradient.h"
 
@@ -130,9 +132,8 @@
 		
 		cp.x *= 1.5;
 		cp.y *= 1.5;
-		twopi = 2 * pi;
+		twopi = 2 * M_PI;
 		
-#warning 64BIT: Inspect use of unsigned long
 #warning 64BIT: Inspect use of unsigned long
 		unsigned long* p = (unsigned long*) buffer;
 		
@@ -142,7 +143,7 @@
 			{
 				// need to know angle of x,y relative to centre point which gives us an index into the colour table
 				
-				angle = atan2f((CGFloat) y - cp.y, (CGFloat) x - cp.x ) + pi;
+				angle = atan2f((CGFloat) y - cp.y, (CGFloat) x - cp.x ) + M_PI;
 				colour = (NSUInteger)(( angle * (CGFloat) nColours ) / twopi );
 				
 				// add a bit of random dither to the colour

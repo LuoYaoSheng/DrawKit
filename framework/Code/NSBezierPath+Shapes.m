@@ -6,6 +6,9 @@
 ///
 ///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
 //
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "NSBezierPath+Shapes.h"
 #import "NSBezierPath+Geometry.h"
@@ -101,7 +104,7 @@ static const CGFloat sin60 = 0.8660254038;
 	// returns a path representing a roller chain sprocket having the pitch and number of teeeth specified. The sprocket is centred at the
 	// origin and is sized as needed to accommodate the number of teeth required.
 	
-	CGFloat toothAngle = pi / teeth;
+	CGFloat toothAngle = M_PI / teeth;
 	CGFloat radius = pitch / ( 2 * sinf( toothAngle ));
 	CGFloat rollerRadius = pitch / 3.6f;
 	CGFloat toothRadius = pitch - rollerRadius;
@@ -118,14 +121,14 @@ static const CGFloat sin60 = 0.8660254038;
 	
 	// tooth root follows roller radius
 
-	CGFloat taDegrees = ( toothAngle * 180.0 ) / pi;
+	CGFloat taDegrees = ( toothAngle * 180.0 ) / M_PI;
 	
 	[tooth appendBezierPathWithArcWithCenter:rp1 radius:rollerRadius startAngle:180 + taDegrees endAngle:270 clockwise:NO];
 	
 	// flank of tooth follows the larger radius until it reaches the halfway point. The x3 here stops it slightly short so that
 	// the top edge of the tooth is flattened off a little
 	
-	CGFloat endAngle = ( cosf( pitch / ( 3 * toothRadius )) * 180.0 ) / pi;
+	CGFloat endAngle = ( cosf( pitch / ( 3 * toothRadius )) * 180.0 ) / M_PI;
 	
 	[tooth appendBezierPathWithArcWithCenter:rp2 radius:toothRadius startAngle:90 endAngle:endAngle clockwise:YES];
 	[tooth appendBezierPathWithArcWithCenter:rp1 radius:toothRadius startAngle:360 - endAngle endAngle:270 clockwise:YES];

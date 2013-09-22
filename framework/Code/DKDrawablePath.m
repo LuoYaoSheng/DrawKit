@@ -3,8 +3,11 @@
 ///  DrawKit ©2005-2008 Apptree.net
 //
 //  Created by Graham Cox on 10/09/2006.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
 //
 
 #import "DKDrawablePath.h"
@@ -1569,7 +1572,7 @@ finish:
 					// start angle based on the slope of this line
 					
 					radius = hypotf( p.x - centre.x, p.y - centre.y );
-					startAngle = ( atan2f( p.y - centre.y, p.x - centre.x ) * 180.0 ) / pi;
+					startAngle = ( atan2f( p.y - centre.y, p.x - centre.x ) * 180.0 ) / M_PI;
 					++phase;	// now setting the arc
 				}
 				else
@@ -1591,13 +1594,13 @@ finish:
 						p.x += 4;
 						p.y -= 12;
 						
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 						[[self layer] showInfoWindowWithString:[NSString stringWithFormat:@"radius: %.2f%@", rad, abbrUnits] atPoint:nsp];
 					}
 				}
 				else if ( phase == 1 )
 				{
-					endAngle = ( atan2f( p.y - centre.y, p.x - centre.x ) * 180.0 ) / pi;
+					endAngle = ( atan2f( p.y - centre.y, p.x - centre.x ) * 180.0 ) / M_PI;
 					
 					[self setStyle:savedStyle];
 					[path removeAllPoints];
@@ -1621,8 +1624,8 @@ finish:
 						p.x += 4;
 						p.y -= 12;
 						
-#warning 64BIT: Check formatting arguments
-						[[self layer] showInfoWindowWithString:[NSString stringWithFormat:@"radius: %.2f%@\nangle: %.1f%C", rad, abbrUnits, angle, 0xB0] atPoint:nsp];
+//#warning 64BIT: Check formatting arguments
+						[[self layer] showInfoWindowWithString:[NSString stringWithFormat:@"radius: %.2f%@\nangle: %.1f%C", rad, abbrUnits, angle, (unichar)0xB0] atPoint:nsp];
 					}
 				}
 				break;
@@ -2979,7 +2982,7 @@ finish:
 ///
 ///********************************************************************************************************************
 
-- (void)				mouseDraggedAtPoint:(NSPoint) mp inPart:(NSInteger) partcode event:(NSEvent*) evt
+- (void)mouseDraggedAtPoint:(NSPoint)mp inPart:(NSInteger)partcode event:(NSEvent*)evt
 {
 	if (partcode == kDKDrawingEntireObjectPart )
 	{
@@ -2998,7 +3001,7 @@ finish:
 			NSPoint		gridPt = [self convertPointToDrawing:mp];
 			NSString*	abbrUnits = [[self drawing] abbreviatedDrawingUnits];
 			
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 			[[self layer] showInfoWindowWithString:[NSString stringWithFormat:@"x: %.2f%@\ny: %.2f%@", gridPt.x, abbrUnits, gridPt.y, abbrUnits] atPoint:mp];
 		}
 		
@@ -3023,7 +3026,7 @@ finish:
 ///
 ///********************************************************************************************************************
 
-- (void)				mouseUpAtPoint:(NSPoint) mp inPart:(NSInteger) partcode event:(NSEvent*) evt
+- (void)mouseUpAtPoint:(NSPoint)mp inPart:(NSInteger) partcode event:(NSEvent*) evt
 {
 	if ( partcode == kDKDrawingEntireObjectPart )
 		[super mouseUpAtPoint:mp inPart:partcode event:evt];

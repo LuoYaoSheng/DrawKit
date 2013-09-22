@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKObjectDrawingLayer+Duplication.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 22/06/2007.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKObjectDrawingLayer+Duplication.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 22/06/2007.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKObjectDrawingLayer+Duplication.h"
 
@@ -171,11 +173,11 @@
 	
 	// how many fit in a circle?
 	
-	NSInteger number = (NSInteger)((2 * pi) / incAngle) + 1;
+	NSInteger number = (NSInteger)((2 * M_PI) / incAngle) + 1;
 	
 	// to fit this many exactly will require a small increase in radius
 	
-	incAngle = ( 2 * pi ) / (CGFloat)number;
+	incAngle = ( 2 * M_PI ) / (CGFloat)number;
 	radius = r / tanf( incAngle * 0.5f );
 	
 	// set the duplication master at this radius from centre
@@ -189,8 +191,6 @@
 	
 	return [self polarDuplicate:[NSArray arrayWithObject:object] centre:centre numberOfCopies:number - 1 incrementAngle:incAngle rotateCopies:YES];
 }
-
-
 
 ///*********************************************************************************************************************
 ///
@@ -211,7 +211,7 @@
 ///
 ///********************************************************************************************************************
 
-- (NSArray*)	concentricDuplicate:(NSArray*) objectsToDuplicate
+- (NSArray *)concentricDuplicate:(NSArray *) objectsToDuplicate
 				centre:(NSPoint) centre
 				numberOfCopies:(NSInteger) nCopies
 				insetBy:(CGFloat) inset

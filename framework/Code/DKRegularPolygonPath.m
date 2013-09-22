@@ -5,6 +5,9 @@
 //  Created by Graham Cox on 06/07/2008.
 //  Copyright 2008 Apptree.net. All rights reserved.
 //
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKRegularPolygonPath.h"
 #import "DKDrawableShape.h"
@@ -170,7 +173,7 @@ static CGFloat			sAngleConstraint = 0.261799387799;	// 15°
 	BOOL			hadFirstPoint = NO, isStar = NO;
 	CGFloat			pa, lpa, tip, valley, halfPi;
 	
-	halfPi = pi * 0.5f;
+	halfPi = M_PI_2;
 	p = fp = pp = NSZeroPoint;
 	lpa = 0;
 	
@@ -615,7 +618,7 @@ static CGFloat			sAngleConstraint = 0.261799387799;	// 15°
 		default:
 		{
 			NSInteger i = pc - kDKRegularPolyFirstVertexPart;
-			angle = (( 2 * pi * i) / [self numberOfSides]) + [self angle];
+			angle = (( 2 * M_PI * i) / [self numberOfSides]) + [self angle];
 	
 			if(( mInnerRadius >= 0.0 ) && ( i & 1 ) == 1 )
 				radius *= [self innerRadius];

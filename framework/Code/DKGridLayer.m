@@ -665,7 +665,7 @@ static NSColor*		sMajorColour = nil;
 ///
 ///********************************************************************************************************************
 
-- (void)			synchronizeRulers
+- (void)synchronizeRulers;
 {
 	NSString*	units = [[self drawing] drawingUnits];
 	CGFloat		conversionFactor = [[self drawing] unitToPointsConversionFactor];
@@ -1705,14 +1705,14 @@ static NSColor*		sMajorColour = nil;
 #pragma mark -
 #pragma mark As part of NSMenuValidation protocol
 
-- (BOOL)					validateMenuItem:(NSMenuItem*) item
+- (BOOL)validateMenuItem:(NSMenuItem*)item;
 {
 	SEL		action = [item action];
 	
 	if ( action == @selector( copy: ))
 	{
 		NSString* title = NSLocalizedString(@"Copy %@", nil);
-#warning 64BIT: Check formatting arguments
+//#warning 64BIT: Check formatting arguments
 		[item setTitle:[NSString stringWithFormat:title, [self layerName]]];
 		return YES;
 	}

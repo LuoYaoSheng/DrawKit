@@ -114,7 +114,7 @@ static NSSize			sTempSavedOffset;
 ///
 ///********************************************************************************************************************
 
-+ (void)				setAngularConstraintAngle:(CGFloat) radians
++ (void)setAngularConstraintAngle:(CGFloat)radians
 {
 	sAngleConstraint = radians;
 }
@@ -1971,8 +1971,8 @@ static NSSize			sTempSavedOffset;
 				break;
 				
 			case kDKShapeOperationRotate:
-#warning 64BIT: Check formatting arguments
-				infoStr = [NSString stringWithFormat:@"%.1f%C", [self angleInDegrees], 0xB0];	// UTF-8 for degree symbol is 0xB0
+//#warning 64BIT: Check formatting arguments
+				infoStr = [NSString stringWithFormat:@"%.1f%C", [self angleInDegrees], (unichar)0xB0];	// UTF-8 for degree symbol is 0xB0
 				break;
 		}
 		
@@ -3441,7 +3441,7 @@ static NSSize			sTempSavedOffset;
 }
 
 
-- (void)				styleWillChange:(NSNotification*) note
+- (void)				styleWillChange:(NSNotification *)note
 {
 	[super styleWillChange:note];
 	mBoundsCache = NSZeroRect;

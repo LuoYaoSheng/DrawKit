@@ -1,13 +1,14 @@
-///**********************************************************************************************************************************
-///  DKArcPath.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 25/06/2008.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
-
+//
+//  DKArcPath.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 25/06/2008.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKArcPath.h"
 #import "DKDrawableShape.h"
@@ -972,10 +973,10 @@ static CGFloat			sAngleConstraint = 0.261799387799;	// 15°
 		CGFloat angle = ( mStartAngle + mEndAngle ) * 0.5f;
 		
 		if (fabs(mEndAngle - mStartAngle) < 0.001)
-			angle -= pi;
+			angle -= M_PI;
 		
 		if ( mEndAngle < mStartAngle )
-			angle += pi;
+			angle += M_PI;
 		
 		return angle;
 	}

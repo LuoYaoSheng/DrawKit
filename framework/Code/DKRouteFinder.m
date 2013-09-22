@@ -5,6 +5,9 @@
 //  Created by Graham Cox on 30/07/2008.
 //  Copyright 2008 Apptree.net. All rights reserved.
 //
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKRouteFinder.h"
 
@@ -482,8 +485,8 @@ static DKDirection	directionOfAngle( const CGFloat angle )
 {
 	// given an angle in radians, returns its basic direction.
 	
-	CGFloat fortyFiveDegrees = pi * 0.25f;
-	CGFloat oneThirtyFiveDegrees = pi * 0.75f;
+	CGFloat fortyFiveDegrees = M_PI_4;
+	CGFloat oneThirtyFiveDegrees = M_PI * 0.75f;
 	
 	if( angle >= -fortyFiveDegrees && angle < fortyFiveDegrees )
 		return kDirectionEast;
@@ -499,24 +502,17 @@ static DKDirection	directionOfAngle( const CGFloat angle )
 #pragma mark - from Numerical Recipes in C (2nd ed. Ch 10. p448)
 
 #warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+#warning 64BIT: Inspect use of unsigned long
+
 static NSInteger*		ivector(long nl, long nh);
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+
 static void		free_ivector(NSInteger *v, long nl, long nh);
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+
 static CGFloat	ran3(long *idum);
-#warning 64BIT: Inspect use of unsigned long
-#warning 64BIT: Inspect use of unsigned long
+
 static NSInteger		irbit1(unsigned long *iseed);
 static NSInteger		metrop(CGFloat de,CGFloat t); 
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+
 static CGFloat	ran3(long* idum); 
 static CGFloat	revcst(CGFloat x[], CGFloat y[], NSInteger iorder[], NSInteger ncity, NSInteger n[]); 
 static void		reverse(NSInteger iorder[], NSInteger ncity, NSInteger n[]); 
@@ -530,15 +526,13 @@ static void		trnspt(NSInteger iorder[], NSInteger ncity, NSInteger n[]);
 
 /* allocate an int vector with subscript range v[nl..nh] */
 
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+
 #warning 64BIT: Inspect use of long
 NSInteger*	ivector(long nl, long nh)
 {
 	NSInteger *v;
 
-#warning 64BIT: Inspect use of sizeof
+
 #warning 64BIT: Inspect use of sizeof
 	v=(NSInteger *)malloc((size_t) ((nh-nl+1+NR_END)*sizeof(NSInteger)));
 	if ( v != NULL )
@@ -550,9 +544,7 @@ NSInteger*	ivector(long nl, long nh)
 
 /* free an int vector allocated with ivector() */
 
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
+
 #warning 64BIT: Inspect use of long
 void	free_ivector(NSInteger *v, long nl, long nh)
 {
@@ -567,16 +559,16 @@ void	free_ivector(NSInteger *v, long nl, long nh)
 #define MZ 0
 #define FAC (1.0/MBIG)
 
-#warning 64BIT: Inspect use of long
+
 #warning 64BIT: Inspect use of long
 CGFloat ran3(long *idum)
 {
 	static NSInteger inext,inextp;
-#warning 64BIT: Inspect use of long
+
 #warning 64BIT: Inspect use of long
 	static long ma[56];
 	static NSInteger iff=0;
-#warning 64BIT: Inspect use of long
+
 #warning 64BIT: Inspect use of long
 	long mj,mk;
 	NSInteger i,ii,k;
@@ -635,11 +627,11 @@ CGFloat ran3(long *idum)
 #define IB18 131072
 #define MASK (IB1+IB2+IB5)
 
-#warning 64BIT: Inspect use of unsigned long
+
 #warning 64BIT: Inspect use of unsigned long
 NSInteger irbit1(unsigned long *iseed)
 {
-#warning 64BIT: Inspect use of unsigned long
+
 #warning 64BIT: Inspect use of unsigned long
 	unsigned long newbit;
 
@@ -673,9 +665,7 @@ CGFloat	anneal( CGFloat x[], CGFloat y[], NSInteger iorder[], NSInteger ncity, N
 
 	static			NSInteger n[7]; 
 #warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
 	static long		idum = -1; 
-#warning 64BIT: Inspect use of unsigned long
 #warning 64BIT: Inspect use of unsigned long
 	static unsigned long	iseed = 111; 
 	CGFloat			path, de, t, previousPath; 
@@ -934,11 +924,9 @@ metrop = 1(true), while if de > 0, metrop is only true with probability exp(-de/
 t is a temperature determined by the annealing schedule. 
 */
 
-NSInteger	metrop(CGFloat de, CGFloat t) 
-{ 
-#warning 64BIT: Inspect use of long
-#warning 64BIT: Inspect use of long
-	static long gljdum = 1; 
+NSInteger metrop(CGFloat de, CGFloat t)
+{
+	static long gljdum = 1;
 	
 	return de < 0.0 || ran3(&gljdum) < _CGFloatExp(-de/t); 
 } 
