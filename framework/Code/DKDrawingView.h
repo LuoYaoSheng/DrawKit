@@ -90,7 +90,7 @@ DKCropMarkKind;
 - (void)				endTextEditing;
 - (NSTextStorage*)		editedText;
 - (NSTextView*)			textEditingView;
-- (void)				editorFrameChangedNotification:(NSNotification*) note;
+- (void)				editorFrameChangedNotification:(NSNotification *)note;
 - (BOOL)				isTextBeingEdited;
 
 // ruler stuff
@@ -108,7 +108,7 @@ DKCropMarkKind;
 
 // window activations
 
-- (void)				windowActiveStateChanged:(NSNotification*) note;
+- (void)				windowActiveStateChanged:(NSNotification *)note;
 
 
 @end
