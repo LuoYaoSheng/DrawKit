@@ -1,12 +1,14 @@
-///**********************************************************************************************************************************
-///  DKArrowStroke.m
-///  DrawKit ©2005-2008 Apptree.net
-///
-///  Created by Graham Cox on 20/03/2007.
-///
-///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file. 
-///
-///**********************************************************************************************************************************
+//
+//  DKArrowStroke.m
+//  DrawKit ©2005-2008 Apptree.net
+//
+//  Created by Graham Cox on 20/03/2007.
+//
+//	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+//
+//  Updated and refactored by Stephan Zehrer
+//  Copyright (c) 2013 zehrer.net. All rights reserved.
+//
 
 #import "DKArrowStroke.h"
 #import "DKStyle.h"
@@ -349,7 +351,7 @@ NSString*				kDKDimensionUnitsKey		= @"DKDimensionUnits";
 		// this arrowhead is curved to match the actual curvature of the path at the place where the arrow heads will go
 		// angle in degrees is half the atan(y/x)
 		
-		CGFloat	degrees = (atan2f([self arrowHeadWidth], [self arrowHeadLength]) * 90.0 ) / pi;
+		CGFloat	degrees = (atan2f([self arrowHeadWidth], [self arrowHeadLength]) * 90.0 ) / M_PI;
 		CGFloat	hyp = hypotf([self arrowHeadWidth], [self arrowHeadLength]);
 		
 		NSBezierPath* headPath;
@@ -442,7 +444,7 @@ NSString*				kDKDimensionUnitsKey		= @"DKDimensionUnits";
 				// flipped heads point the other way
 				
 				if ( flip )
-					slope += pi;
+					slope += M_PI;
 				
 				NSAffineTransform* scl = [NSAffineTransform transform];
 				
