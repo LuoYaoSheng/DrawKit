@@ -12,7 +12,6 @@
 #import "DKObjectDrawingLayer.h"
 #import "DKShapeGroup.h"
 
-
 @implementation DKSelectionPDFView
 
 - (void)		drawRect:(NSRect) rect
@@ -35,15 +34,14 @@
 	}
 }
 
-
 @end
 
-
 #pragma mark -
+
 @implementation DKLayerPDFView : DKDrawingView
 
 
-- (id)		initWithFrame:(NSRect) frame withLayer:(DKLayer*) aLayer
+- (id)initWithFrame:(NSRect)frame withLayer:(DKLayer *)aLayer;
 {
 	self = [super initWithFrame:frame];
 	if( self != nil )
@@ -54,15 +52,12 @@
 	return self;
 }
 
-
-- (BOOL)		isFlipped
+- (BOOL)isFlipped;
 {
 	return YES;
 }
 
-
-
-- (void)		drawRect:(NSRect) rect
+- (void)drawRect:(NSRect)rect;
 {
 	#pragma unused(rect)
 	
@@ -83,42 +78,35 @@
 
 @end
 
-
-
 #pragma mark -
 
 @implementation DKDrawablePDFView
 
-
-- (id)		initWithFrame:(NSRect) frame object:(DKDrawableObject*) obj
+- (id)initWithFrame:(NSRect)frame object:(DKDrawableObject *)obj;
 {
 	self = [super initWithFrame:frame];
 	if( self != nil )
 	{
-		mObjectRef = obj;
+		_objectRef = obj;
 	}
 	
 	return self;
 }
 
-
-
-- (BOOL)		isFlipped
+- (BOOL)isFlipped;
 {
 	return YES;
 }
 
-
-- (void)		drawRect:(NSRect) rect
+- (void)drawRect:(NSRect)rect;
 {
 #pragma unused(rect)
 	
 	[[NSColor clearColor] set];
 	NSRectFill([self bounds]);
 	
-	if ( mObjectRef )
-		[mObjectRef drawContentWithSelectedState:NO];
+	if ( _objectRef )
+		[_objectRef drawContentWithSelectedState:NO];
 }
-
 
 @end

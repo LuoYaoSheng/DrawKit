@@ -9,7 +9,6 @@
 
 #import "DKDrawingView.h"
 
-
 @class DKDrawableObject, DKObjectOwnerLayer, DKShapeGroup;
 
 
@@ -17,27 +16,23 @@
 @end
 
 
-
 @class DKObjectOwnerLayer, DKShapeGroup;
-
 
 @interface DKLayerPDFView : DKDrawingView
 {
 	DKLayer* mLayerRef;
 }
 
-- (id)		initWithFrame:(NSRect) frame withLayer:(DKLayer*) aLayer;
+- (id)initWithFrame:(NSRect)frame withLayer:(DKLayer *)aLayer;
 
 @end
 
 
 @interface DKDrawablePDFView : NSView
-{
-	DKDrawableObject*	mObjectRef;
-}
 
-- (id)		initWithFrame:(NSRect) frame object:(DKDrawableObject*) obj;
+@property (nonatomic, strong, readonly) DKDrawableObject *objectRef;
 
+- (id)initWithFrame:(NSRect)frame object:(DKDrawableObject *)obj;
 
 @end
 
